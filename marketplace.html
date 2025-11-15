@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Waste2Worth Marketplace</title>
+<style>
+body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; color:#184152;}
+.marketplace-main{max-width:1300px;margin:0 auto;padding:30px 16px 70px;}
+.header-main{font-size:2.2rem;font-weight:800;color:#21808d;margin-bottom:7px;}
+.market-insights{margin:23px 0 18px;padding:18px 22px;border-radius:12px;background:#e6eefd;box-shadow:0 2px 15px #237b8e14;display:flex;gap:38px; flex-wrap:wrap;}
+.market-insights .m-summary{flex:2;font-size:1.08rem;}
+.market-insights .m-prices{display:flex;gap:26px;}
+.market-insights .m-prbox{background:#fff;border-radius:8px;padding:9px 19px;text-align:center;box-shadow:0 1px 4px #21808d12;}
+.m-prbox span{display:block;}
+.m-prbox .label{color:#21808d;font-size:.98rem;}
+.live-listings{display: grid; gap:32px; grid-template-columns: repeat(auto-fit, minmax(350px,1fr)); margin-bottom:48px;}
+.card{background:#fff;border-radius:17px;box-shadow:0 4px 25px #21808d13;padding:0 0 18px 0;display:flex;flex-direction:column;transition:.15s;position:relative;}
+.card:hover{box-shadow:0 8px 32px #1a89aa16;transform:translateY(-3px);}
+.card-header{padding:24px 26px 0 26px;}
+.card-title{font-size:1.3rem;font-weight:700;color:#16747b;}
+.card-sub{color:#19b978;margin-bottom:7px;}
+.card-meta{font-size:1.03rem;color:#689195;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:8px;}
+.badges{margin-bottom:6px;}
+.badge{display:inline-block;background:#d8fbe7;color:#128070;border-radius:12px;padding:5px 13px;font-size:.95rem;margin-right:7px;}
+.badge.eco{background:#d8fbe7;color:#217e36;}
+.badge.trending{background:#ffe4b6;color:#cd9532;}
+.badge.urgent{background:#fbe7e7;color:#c2292e;}
+.badge.verified{background:#d4ecff;color:#2257b4;}
+.card-body{padding:0 26px;}
+.eco-impact{margin:8px 0 5px 0;}
+.card-actions{margin-top:17px;display:flex;justify-content:flex-end;gap:11px;padding:0 26px;}
+.btn{border:none;padding:8px 18px;border-radius:8px;font-weight:700;font-size:.98rem;cursor:pointer;transition:.1s;}
+.btn.primary{background:#21808d;color:white;}
+.btn.secondary{background:#ebf7fc;color:#21808d;border:1.5px solid #21808d;}
+.btn.ghost{background:transparent;color:#21808d;}
+.negotiation-helper{margin-top:10px;}
+.neg-box{display:flex;gap:7px;margin-top:7px;}
+.neg-input{flex:1;padding:8px 13px;border-radius:7px;border:1px solid #c9dbde;font-size:1rem;}
+.neg-btn{background:#19b978;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:600;}
+.neg-suggestion{margin-top:7px;padding:7px 13px;background:#f6ffe2;color:#597526;border-radius:8px;font-size:.97rem;}
+.section-title{font-size:1.23rem;font-weight:700;color:#21808d;margin:24px 0 10px;}
+.recommend{margin-bottom:30px;}
+.rec-head{font-weight:600;color:#19b978;font-size:1rem;}
+.rec-list{display:flex;gap:15px;flex-wrap:wrap;}
+.rec-item{background:#fff;box-shadow:0 1px 5px #21808d10;border-radius:9px;padding:10px 18px;color:#21808d;font-weight:600;}
+.trending-chip{background:#ffe2cc;color:#bb7f13;padding:5px 14px;border-radius:11px;margin-right:12px;font-weight:600;}
+.stats-widgets{display:flex; gap:32px; margin:33px 0 24px 0;}
+.widget{background:#fff;box-shadow:0 1px 6px #21808d10;padding:18px 32px;border-radius:13px;}
+.widget-title{color:#21808d;font-weight:700;}
+.widget-value{font-size:1.21rem;font-weight:700;color:#16747b;}
+@media (max-width:900px){.live-listings{grid-template-columns:1fr;}
+.market-insights,.stats-widgets{ flex-direction:column;gap:14px;} }
+</style>
+</head>
+<body>
+<div class="marketplace-main">
+  <div class="header-main">Marketplace</div>
+
+  <!-- Market Insights-->
+  <div class="market-insights">
+    <div class="m-summary">Plastic Pellets and Cardboard are trending. Verified eco-friendly sellers get 8% higher offers. CO₂ savings on aluminium sales up 5% this week.</div>
+    <div class="m-prices">
+      <div class="m-prbox"><span class="label">Plastic Pellets</span><span>₹81/kg</span></div>
+      <div class="m-prbox"><span class="label">Aluminium Scrap</span><span>₹117/kg</span></div>
+      <div class="m-prbox"><span class="label">Cardboard</span><span>₹15.5/kg</span></div>
+    </div>
+  </div>
+
+  <!-- Stats widgets (market analytics) -->
+  <div class="stats-widgets">
+    <div class="widget">
+      <div class="widget-title">Active Buyers</div>
+      <div class="widget-value">27</div>
+    </div>
+    <div class="widget">
+      <div class="widget-title">Materials Listed</div>
+      <div class="widget-value">15</div>
+    </div>
+    <div class="widget">
+      <div class="widget-title">Eco Offers</div>
+      <div class="widget-value">8</div>
+    </div>
+    <div class="widget">
+      <div class="widget-title">Avg. Close Time</div>
+      <div class="widget-value">2.1 days</div>
+    </div>
+    <div class="widget">
+      <div class="widget-title">Marketplace Volume</div>
+      <div class="widget-value">35022 kg</div>
+    </div>
+  </div>
+
+  <!-- Trending Section -->
+  <div class="section-title">Trending Materials</div>
+  <div>
+    <span class="trending-chip">Plastic Pellets</span>
+    <span class="trending-chip">Aluminium Scrap</span>
+    <span class="trending-chip">E-waste</span>
+    <span class="trending-chip">Cardboard</span>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="recommend">
+    <div class="rec-head">Recommended for you:</div>
+    <div class="rec-list">
+      <div class="rec-item">Sell E-waste</div>
+      <div class="rec-item">Buy Mixed Plastics</div>
+      <div class="rec-item">Sell Cardboard</div>
+    </div>
+  </div>
+
+  <!-- Marketplace Listings -->
+  <div class="section-title">Live Listings</div>
+  <section class="live-listings">
+    <!-- Card 1: Eco, trending, verified, CO2 badge -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Plastic Pellets <span class="card-sub">Seller</span></div>
+        <div class="card-meta">
+          <span>Location: Delhi</span>
+          <span>Volume: 500 kg</span>
+          <span>Price: ₹82/kg</span>
+        </div>
+        <div class="badges">
+          <span class="badge eco">Eco</span>
+          <span class="badge trending">Trending</span>
+          <span class="badge verified">Verified</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="eco-impact">CO₂ Saving: <b>110</b> kg</div>
+        <div class="negotiation-helper">
+          <input class="neg-input" type="text" placeholder="Propose a price or delivery..."/>
+          <button class="neg-btn" onclick="showSuggestion(this, 0)">AI Suggest</button>
+        </div>
+        <div class="neg-suggestion" id="sugg-0" style="display:none">How about splitting the deal at ₹80/kg for half the volume?</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn primary">Contact</button>
+        <button class="btn secondary" onclick="showSuggestion(this, 0)">Negotiate</button>
+        <button class="btn ghost">Report</button>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Aluminium Scrap <span class="card-sub">Seller</span></div>
+        <div class="card-meta">
+          <span>Location: Mumbai</span>
+          <span>Volume: 900 kg</span>
+          <span>Price: ₹120/kg</span>
+        </div>
+        <div class="badges">
+          <span class="badge eco">Eco</span>
+          <span class="badge urgent">Urgent</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="eco-impact">CO₂ Saving: <b>320</b> kg</div>
+        <div class="negotiation-helper">
+          <input class="neg-input" type="text" placeholder="Propose a price..."/>
+          <button class="neg-btn" onclick="showSuggestion(this, 1)">AI Suggest</button>
+        </div>
+        <div class="neg-suggestion" id="sugg-1" style="display:none">Try bidding ₹117/kg and offer immediate pickup.</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn primary">Contact</button>
+        <button class="btn secondary" onclick="showSuggestion(this, 1)">Negotiate</button>
+        <button class="btn ghost">Report</button>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Cardboard <span class="card-sub">Buyer</span></div>
+        <div class="card-meta">
+          <span>Location: Bangalore</span>
+          <span>Volume: 1200 kg</span>
+          <span>Bid: ₹17/kg</span>
+        </div>
+        <div class="badges">
+          <span class="badge trending">Trending</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="eco-impact">CO₂ Saving: <b>--</b> kg</div>
+        <div class="negotiation-helper">
+          <input class="neg-input" type="text" placeholder="Counter price or volume..."/>
+          <button class="neg-btn" onclick="showSuggestion(this, 2)">AI Suggest</button>
+        </div>
+        <div class="neg-suggestion" id="sugg-2" style="display:none">Buyer may accept a bundled delivery at ₹16.5/kg.</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn primary">Contact</button>
+        <button class="btn secondary" onclick="showSuggestion(this, 2)">Negotiate</button>
+        <button class="btn ghost">Report</button>
+      </div>
+    </div>
+    <!-- Add more dummy cards as needed -->
+  </section>
+</div>
+<script>
+// Show a fixed "AI suggestion" for the corresponding card (simulate backend call)
+function showSuggestion(btn, idx) {
+  document.querySelectorAll('.neg-suggestion').forEach(e => e.style.display='none');
+  document.getElementById("sugg-"+idx).style.display = "";
+}
+</script>
+</body>
+</html>

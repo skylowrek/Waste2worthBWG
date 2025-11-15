@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Waste2Worth - Dashboard</title>
+<style>
+body { background: #f4fafb; font-family: "Segoe UI", Arial, sans-serif; color: #163c47; margin: 0; padding: 0;}
+.dashboard-wrapper { max-width: 1300px; margin: 0 auto; padding: 32px 20px 64px; }
+h1 { font-size: 2.5rem; color: #21808d; font-weight: 900; text-align: center; margin-bottom: 1.2rem; }
+.subtitle { text-align: center; color: #466973; font-size: 1.18rem; margin-bottom: 2.2rem; }
+.stats-row { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 2.6rem; }
+.stat-panel {
+  flex: 1 1 240px; background: #eafaf2; border-radius: 14px; box-shadow: 0 2px 16px #21808d11; padding: 30px 0;
+  text-align: center; min-width: 225px;
+}
+.stat-panel .stat-value { font-size: 2.5rem; color: #22a35e; font-weight: 800; }
+.stat-panel .stat-title { font-size: 1.08rem; color: #21808d; font-weight: 700; margin-top: 8px;}
+.panel-group { display: flex; flex-wrap: wrap; gap: 30px; }
+.role-panel {
+  flex: 1 1 420px; background: #ffffff; border-radius: 17px;
+  box-shadow: 0 4px 25px rgba(33,128,141,0.13); padding: 38px 32px; min-width: 330px;
+}
+.role-panel h2 { color: #21808d; font-size: 1.28rem; font-weight: 800; margin-bottom: 11px;}
+.panel-stats { display: flex; gap: 22px; margin-bottom: 22px; }
+.panel-stat { flex: 1 1 120px; background: #e6f2fa; border-radius: 8px; padding: 16px 0; text-align: center; }
+.panel-stat .stat-val { font-size: 1.45rem; color: #16747b; font-weight: 700; }
+.panel-stat .stat-lbl { font-size: 0.98rem; color: #50777c; }
+.panel-activity { margin-bottom: 14px; font-size: 1.03rem; color: #285356; }
+.activity-feed { background: #f2fafd; border: 1px solid #edf4f7; border-radius: 7px; padding: 10px 21px; margin-bottom: 18px; max-height: 170px; overflow-y: auto; }
+.activity-feed .entry { border-bottom: 1px solid #dde4ea; margin-bottom: 7px; padding-bottom: 6px;}
+.activity-feed .entry:last-child { border-bottom: none; }
+.charts-row { display: flex; flex-wrap: wrap; gap: 34px; margin: 36px 0; }
+.chart-panel {
+  background: #ffffff; border-radius: 16px; box-shadow: 0 7px 20px #21808d1a; padding: 30px 28px;
+  flex: 1 1 520px; min-width: 300px;
+}
+.chart-panel h2 { font-size: 1.13rem; color:#21808d; font-weight: 800; margin-bottom: 14px;}
+table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; background: #fff; border-radius: 14px; box-shadow: 0 7px 20px #21808d15;}
+thead { background: #e6f6fe; color: #21808d; font-weight: bold;}
+th, td { padding: 13px 17px; border-bottom: 1px solid #eff4f5; font-size: 1.01rem;}
+tr:last-child td { border-bottom: none;}
+tbody tr:hover { background: #f0f6f9; }
+.footer { margin-top: 54px; color: #50666a; font-size: 1rem; text-align: center; }
+@media (max-width: 950px) {
+  .stats-row, .panel-group, .charts-row { flex-direction: column; }
+  .role-panel, .stat-panel, .chart-panel { min-width: 180px; }
+}
+</style>
+</head>
+<body>
+<div class="dashboard-wrapper">
+  <h1>Waste2Worth Dashboard</h1>
+  <div class="subtitle">All marketplace and impact data in real time – see what's happening right now for buyers & producers</div>
+  <section class="stats-row">
+    <div class="stat-panel">
+      <div class="stat-value">21,900</div>
+      <div class="stat-title">Total Waste Bought (kg)</div>
+    </div>
+    <div class="stat-panel">
+      <div class="stat-value">19,200</div>
+      <div class="stat-title">Total Waste Sold (kg)</div>
+    </div>
+    <div class="stat-panel">
+      <div class="stat-value">16</div>
+      <div class="stat-title">Active Marketplace Deals</div>
+    </div>
+    <div class="stat-panel">
+      <div class="stat-value">11,780</div>
+      <div class="stat-title">CO₂ Saved (kg)</div>
+    </div>
+  </section>
+  <section class="panel-group">
+    <div class="role-panel">
+      <h2>Buyer Activity</h2>
+      <div class="panel-stats">
+        <div class="panel-stat">
+          <div class="stat-val">₹6,40,000</div>
+          <div class="stat-lbl">Total Spent (₹)</div>
+        </div>
+        <div class="panel-stat">
+          <div class="stat-val">13</div>
+          <div class="stat-lbl">Active Bids</div>
+        </div>
+        <div class="panel-stat">
+          <div class="stat-val">23</div>
+          <div class="stat-lbl">Materials Sourced</div>
+        </div>
+      </div>
+      <div class="panel-activity">Recent Buyer Actions</div>
+      <div class="activity-feed">
+        <div class="entry">Placed bid for 500 kg Metal Scrap @ GreenCycle Corp</div>
+        <div class="entry">Won deal for 220 kg HDPE Plastic from WasteX Solutions</div>
+        <div class="entry">Alerted for E-waste (bid ₹70/kg)</div>
+      </div>
+    </div>
+    <div class="role-panel">
+      <h2>Producer Activity</h2>
+      <div class="panel-stats">
+        <div class="panel-stat">
+          <div class="stat-val">₹7,32,000</div>
+          <div class="stat-lbl">Total Revenue (₹)</div>
+        </div>
+        <div class="panel-stat">
+          <div class="stat-val">9</div>
+          <div class="stat-lbl">Active Listings</div>
+        </div>
+        <div class="panel-stat">
+          <div class="stat-val">3</div>
+          <div class="stat-lbl">Pending Offers</div>
+        </div>
+      </div>
+      <div class="panel-activity">Recent Producer Actions</div>
+      <div class="activity-feed">
+        <div class="entry">Added listing for 1000 kg Cardboard Sheets</div>
+        <div class="entry">Accepted offer for 600 kg Aluminium</div>
+        <div class="entry">Revenue received for 250 kg Textile Scrap</div>
+      </div>
+    </div>
+  </section>
+  <div class="charts-row">
+    <div class="chart-panel">
+      <h2>Waste Bought vs Sold (Last 7 Days)</h2>
+      <canvas id="wasteChart"></canvas>
+    </div>
+    <div class="chart-panel">
+      <h2>Company Deals Distribution</h2>
+      <canvas id="companyDealsChart"></canvas>
+    </div>
+  </div>
+  <section>
+    <h2>Marketplace Recent Transactions</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>User</th><th>Role</th><th>Material</th><th>Type</th><th>Amount (kg)</th><th>Value (₹)</th><th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="transactionsTable">
+        <tr><td>2011</td><td>Ananya</td><td>Buyer</td><td>Plastic Pellets</td><td>Bought</td><td>400</td><td>₹32,000</td><td>2025-11-12</td></tr>
+        <tr><td>2007</td><td>Kumar Metals</td><td>Producer</td><td>Aluminium Scrap</td><td>Sold</td><td>600</td><td>₹80,000</td><td>2025-11-13</td></tr>
+        <tr><td>2001</td><td>EcoWaste LLP</td><td>Buyer</td><td>Cardboard</td><td>Bought</td><td>1000</td><td>₹18,000</td><td>2025-11-13</td></tr>
+        <tr><td>1990</td><td>GreenTextiles</td><td>Producer</td><td>Textile Scrap</td><td>Sold</td><td>250</td><td>₹15,000</td><td>2025-11-14</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <div class="footer">&copy; 2025 Waste2Worth. All rights reserved.</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Dummy data for charts:
+const wasteData = {
+  labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+  bought: [2700, 3200, 2500, 3200, 3100, 2900, 3300],
+  sold:   [2000, 2600, 1950, 2900, 2700, 2600, 2900]
+};
+const dealsData = {
+  labels: ['EcoWaste LLP', 'GreenCycle', 'Kumar Metals', 'WasteX', 'RecyclePro'],
+  counts: [14, 11, 8, 6, 3]
+};
+function plotCharts() {
+  const ctx1 = document.getElementById('wasteChart').getContext('2d');
+  new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: wasteData.labels,
+      datasets: [
+        { label: 'Bought', data: wasteData.bought, borderColor: '#21808d', backgroundColor: 'rgba(33,128,141,0.13)', fill: true, tension: 0.4 },
+        { label: 'Sold', data: wasteData.sold, borderColor: '#19b978', backgroundColor: 'rgba(25,185,120,0.15)', fill: true, tension: 0.4 }
+      ]
+    },
+    options: { plugins:{legend:{position:'top'}}, scales: {y:{beginAtZero:true}} }
+  });
+  const ctx2 = document.getElementById('companyDealsChart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: dealsData.labels,
+      datasets: [{ label: 'Deals', data: dealsData.counts, backgroundColor: ['#21808d', '#19b978', '#21808d', '#19b978', '#21808d'] }]
+    },
+    options: { plugins:{legend:{display:false}}, scales: {y:{beginAtZero:true}} }
+  });
+}
+document.addEventListener('DOMContentLoaded', plotCharts);
+</script>
+</body>
+</html>

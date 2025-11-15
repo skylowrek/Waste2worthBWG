@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Waste Scanner | Waste2Worth</title>
+<style>
+body { margin:0;background:#f6f9fa;font-family:'Segoe UI',Arial,sans-serif;color:#164044;}
+.scanner-main { max-width:430px;margin:3vw auto 0 auto; background: #fff; border-radius:22px; box-shadow:0 4px 24px #21808d1c; padding:34px 28px 30px;}
+h1 { color:#21808d; font-weight:900; text-align:center; font-size:2.1rem;}
+.subtitle { color:#466973; text-align:center; margin-bottom:22px;}
+.scan-view { background:#e6f1fd; border-radius:11px; height:330px; display:flex;align-items:center;justify-content:center;position:relative;border:7px dashed #b4deee; margin-bottom:18px;}
+#scanImage { max-width:98%; max-height:300px; border-radius:8px;}
+.scan-action-btns {display:flex;gap:15px;justify-content:center;margin-bottom:8px;}
+.scan-btn, .scan-upload-btn { background:#21808d;color:#fff;padding:11px 23px;border:none;border-radius:8px;font-size:1.05rem;font-weight:700;cursor:pointer;}
+.scan-upload-btn {background:#19b978;}
+.scan-btn:hover, .scan-upload-btn:hover {opacity:0.89;}
+input[type='file']{display:none;}
+label.upload-label{display:inline-block;cursor:pointer;}
+.scan-caption{text-align:center;color:#35778a;font-size:.98rem;margin-bottom:8px;}
+.result-block{margin:13px 0 3px 0;background:#f6fff9;border-radius:12px;box-shadow:0 1px 7px #18bf8c11;padding:20px;}
+.result-title{color:#19b978;font-size:1.17rem;font-weight:700;margin-bottom:3px;}
+.result-row{display:flex;justify-content:space-between;margin-bottom:7px;}
+.result-mat{font-weight:700;}
+.result-usage{color:#258895;font-size:1.01rem;}
+#ai-insight{margin-top:18px;margin-bottom:4px;border-radius:10px;background:#e6f7d1;color:#516f2f;padding:13px;font-style:italic;font-size:1.05rem;}
+@media(max-width:600px){.scanner-main{padding:11px 5vw;}.scan-view{height:220px;}}
+</style>
+</head>
+<body>
+<div class="scanner-main">
+  <h1>Garbage Scanner</h1>
+  <div class="subtitle">Scan or upload a photo of waste to get instant identification and AI-powered suggestions for optimal use!</div>
+  <div class="scan-view" id="scanView">
+    <span class="scan-caption" id="camMsg">No scan yet</span>
+    <img id="scanImage" style="display:none"/>
+  </div>
+  <div class="scan-action-btns">
+    <button class="scan-btn" onclick="startCamera()">Scan via Camera</button>
+    <label class="scan-upload-btn upload-label">
+      Upload Image
+      <input type="file" accept="image/*" id="imgInput" onchange="uploadImage(event)"/>
+    </label>
+  </div>
+  <div id="resultBlock" style="display:none">
+    <div class="result-title">Scanned Materials</div>
+    <div class="result-row"><span class="result-mat">Plastic (PET)</span><span>32%</span></div>
+    <div class="result-row"><span class="result-mat">Aluminium</span><span>18%</span></div>
+    <div class="result-row"><span class="result-mat">Food/Biomass</span><span>41%</span></div>
+    <div class="result-row"><span class="result-mat">Others</span><span>9%</span></div>
+    <div class="result-title" style="margin-top:14px">Optimal Usage</div>
+    <div class="result-usage">• Plastic: Recycle as PET bottles/pellets<br/>
+        • Aluminium: Melt for new sheet/can stock<br/>
+        • Food: Compost or bio-digester<br/>
+        • Others: Sorted disposal</div>
+    <div id="ai-insight">
+      "This mix is best processed in a materials recovery facility. Diverting this amount saves 17kg CO₂ and creates value from compost and recyclables!"<br/>
+      <b>- Gemini AI</b>
+    </div>
+  </div>
+</div>
+<script>
+// Dummy camera (no real camera here, simulate scan for demo)
+function startCamera() {
+  document.getElementById('camMsg').textContent = "Simulating scan... Sample image loaded.";
+  let img = document.getElementById('scanImage');
+  img.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=560&q=80";
+  img.style.display = "";
+  document.getElementById('resultBlock').style.display = "";
+}
+
+// File upload shows preview and result
+function uploadImage(event) {
+  let file = event.target.files && event.target.files[0];
+  if (!file) return;
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let img = document.getElementById('scanImage');
+    img.src = e.target.result;
+    img.style.display = "";
+    document.getElementById('camMsg').textContent = "Image uploaded!";
+    document.getElementById('resultBlock').style.display = "";
+  };
+  reader.readAsDataURL(file);
+}
+</script>
+</body>
+</html>

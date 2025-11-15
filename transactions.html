@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Waste2Worth Transactions</title>
+<style>
+body { background:#f8fbfd; font-family:'Segoe UI',Arial,sans-serif; color:#172b3a; margin:0; }
+.tx-main{max-width:610px;margin:0 auto;padding:40px 16px 60px;}
+h1{color:#21808d;font-size:2.1rem;font-weight:800;margin-bottom:17px;}
+.sub{color:#4d7183;font-size:1.09rem;margin-bottom:21px;}
+.tx-form{background:#fff;box-shadow:0 2px 18px #1a89aa12;padding:28px 28px 22px;border-radius:17px;}
+.form-group{margin-bottom:18px;}
+label{font-weight:700;color:#21808d;margin-bottom:5px;display:block;}
+input[type=text],input[type=number],input[type=email],select,textarea {
+  width:100%;padding:8px 12px;margin-top:3px;border:1.3px solid #d2e8eb;border-radius:7px;font-size:1rem;background:#f7fcfe;}
+textarea {min-height:55px;resize:vertical;}
+.pay-methods{display:flex;gap:11px;flex-wrap:wrap;margin:7px 0 0 0;}
+.pay-choice{flex:1;min-width:110px;text-align:center;padding:13px 0;border-radius:10px;font-weight:700;
+  border:2px solid #c8e4ee;background:#e1f4fd;color:#21808d;cursor:pointer;transition:.16s;}
+.pay-choice.selected, .pay-choice:hover {border:2.5px solid #21808d;background:#d0eaee;color:#15546b;}
+.btn-submit{
+  display:inline-block;background:#21808d;
+  color:#fff;padding:11px 34px;border-radius:10px;font-size:1.1rem;border:none;font-weight:700;cursor:pointer;margin-top:18px;transition:.1s;
+}
+.btn-submit:hover{background:#15546b;}
+.summary {background:#f2fafd;padding:18px 19px;border-radius:13px;margin:22px 0;color:#15444c;}
+.payment-info, .compliance-info{font-size:.98rem;margin-top:7px; color:#28737b;}
+@media (max-width:700px){.tx-main{padding:18px;}.tx-form{padding:13px;}}
+</style>
+</head>
+<body>
+<div class="tx-main">
+  <h1>Transactions & Payment</h1>
+  <div class="sub">
+    Complete your transaction below. Please answer all fields. Payment options, delivery, and compliance questions included!
+  </div>
+  <form class="tx-form" onsubmit="event.preventDefault(); showSummary();">
+    <div class="form-group">
+      <label for="dealType">Are you <b>buying</b> or <b>selling</b>?</label>
+      <select id="dealType" required>
+        <option value="">Select...</option>
+        <option>Buying</option>
+        <option>Selling</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="material">Material Type</label>
+      <input type="text" id="material" required placeholder="e.g., Plastic Pellets, E-waste, Cardboard"/>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity (kg)</label>
+      <input type="number" id="quantity" min="1" required placeholder="Enter quantity in kg"/>
+    </div>
+    <div class="form-group">
+      <label for="value">Deal Value (₹)</label>
+      <input type="number" id="value" min="1" required placeholder="Total value (₹)"/>
+    </div>
+    <div class="form-group">
+      <label for="counterparty">Counterparty (User/Company Name)</label>
+      <input type="text" id="counterparty" required/>
+    </div>
+    <div class="form-group">
+      <label for="delivery">Delivery or Pickup Details</label>
+      <textarea id="delivery" required placeholder="Address, instructions, timings etc."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="compliance">Compliance Checks</label>
+      <select id="compliance" required>
+        <option value="">Select compliance status</option>
+        <option>Material conforms to standards</option>
+        <option>Seller provided certification</option>
+        <option>No hazardous content</option>
+        <option>Requires further documentation</option>
+      </select>
+      <div class="compliance-info">Attach or upload compliance file via dashboard after submission.</div>
+    </div>
+    <div class="form-group">
+      <label for="payment">Select Payment Method</label>
+      <div class="pay-methods">
+        <div class="pay-choice" onclick="selectPay('upi')" id="pay-upi">UPI</div>
+        <div class="pay-choice" onclick="selectPay('card')" id="pay-card">Credit/Debit Card</div>
+        <div class="pay-choice" onclick="selectPay('wallet')" id="pay-wallet">Digital Wallet</div>
+        <div class="pay-choice" onclick="selectPay('bank')" id="pay-bank">Bank Transfer</div>
+        <div class="pay-choice" onclick="selectPay('cod')" id="pay-cod">COD</div>
+        <div class="pay-choice" onclick="selectPay('crypto')" id="pay-crypto">Crypto (USDT/BTC)</div>
+      </div>
+      <input type="hidden" id="paymentMethod" name="paymentMethod" value="" required/>
+      <div class="payment-info" id="paymentInfo"></div>
+    </div>
+    <div class="form-group">
+      <label for="special">Special Instructions / Notes</label>
+      <textarea id="special" placeholder="E.g. require split delivery, specific test, insurance, etc."></textarea>
+    </div>
+    <button class="btn-submit" type="submit">Submit Transaction</button>
+  </form>
+  <div id="resultDemo"></div>
+</div>
+<script>
+function selectPay(method) {
+  document.querySelectorAll('.pay-choice').forEach(el => el.classList.remove('selected'));
+  document.getElementById('pay-'+method).classList.add('selected');
+  document.getElementById('paymentMethod').value = method;
+  let txt = {
+    upi: "You'll be prompted to authorise payment via your preferred UPI app.",
+    card: "You can pay instantly using any major credit or debit card.",
+    wallet: "Supports Paytm, Google Pay, and more.",
+    bank: "NEFT/IMPS/RTGS accepted with automated confirmation.",
+    cod: "Pay on delivery/pickup to logistics partner.",
+    crypto: "Wallet details and QR will be shown after submission. Currently supports USDT/BTC."
+  }[method];
+  document.getElementById('paymentInfo').textContent = txt;
+}
+
+function showSummary() {
+  let vals = {};
+  ['dealType','material','quantity','value','counterparty','delivery','compliance','paymentMethod','special'].forEach(id => {
+    vals[id] = document.getElementById(id)?.value || "";
+  });
+  document.getElementById('resultDemo').innerHTML = `
+    <div class="summary"><b>Transaction Submitted!</b>
+      <br><br>
+      <b>Type:</b> ${vals.dealType}<br>
+      <b>Material:</b> ${vals.material}<br>
+      <b>Quantity:</b> ${vals.quantity} kg<br>
+      <b>Value:</b> ₹${vals.value}<br>
+      <b>Counterparty:</b> ${vals.counterparty}<br>
+      <b>Delivery:</b> ${vals.delivery}<br>
+      <b>Compliance:</b> ${vals.compliance}<br>
+      <b>Payment Method:</b> ${vals.paymentMethod.toUpperCase()}<br>
+      <b>Special Notes:</b> ${vals.special}
+      <br><br>
+      <span style="color:#1ca043;font-weight:600;">Next Steps:</span>
+      <ul>
+        <li>Check your email and dashboard for payment and order confirmation.</li>
+        <li>Download/attach compliance docs if needed.</li>
+        <li>Contact support if you need to modify or dispute this transaction.</li>
+      </ul>
+    </div>
+  `
+  document.querySelector("form").reset();
+  document.querySelectorAll('.pay-choice').forEach(el => el.classList.remove('selected'));
+  document.getElementById('paymentInfo').textContent = "";
+}
+</script>
+</body>
+</html>
