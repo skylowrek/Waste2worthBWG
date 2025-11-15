@@ -1,147 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Waste2Worth Transactions</title>
-<style>
-body { background:#f8fbfd; font-family:'Segoe UI',Arial,sans-serif; color:#172b3a; margin:0; }
-.tx-main{max-width:610px;margin:0 auto;padding:40px 16px 60px;}
-h1{color:#21808d;font-size:2.1rem;font-weight:800;margin-bottom:17px;}
-.sub{color:#4d7183;font-size:1.09rem;margin-bottom:21px;}
-.tx-form{background:#fff;box-shadow:0 2px 18px #1a89aa12;padding:28px 28px 22px;border-radius:17px;}
-.form-group{margin-bottom:18px;}
-label{font-weight:700;color:#21808d;margin-bottom:5px;display:block;}
-input[type=text],input[type=number],input[type=email],select,textarea {
-  width:100%;padding:8px 12px;margin-top:3px;border:1.3px solid #d2e8eb;border-radius:7px;font-size:1rem;background:#f7fcfe;}
-textarea {min-height:55px;resize:vertical;}
-.pay-methods{display:flex;gap:11px;flex-wrap:wrap;margin:7px 0 0 0;}
-.pay-choice{flex:1;min-width:110px;text-align:center;padding:13px 0;border-radius:10px;font-weight:700;
-  border:2px solid #c8e4ee;background:#e1f4fd;color:#21808d;cursor:pointer;transition:.16s;}
-.pay-choice.selected, .pay-choice:hover {border:2.5px solid #21808d;background:#d0eaee;color:#15546b;}
-.btn-submit{
-  display:inline-block;background:#21808d;
-  color:#fff;padding:11px 34px;border-radius:10px;font-size:1.1rem;border:none;font-weight:700;cursor:pointer;margin-top:18px;transition:.1s;
-}
-.btn-submit:hover{background:#15546b;}
-.summary {background:#f2fafd;padding:18px 19px;border-radius:13px;margin:22px 0;color:#15444c;}
-.payment-info, .compliance-info{font-size:.98rem;margin-top:7px; color:#28737b;}
-@media (max-width:700px){.tx-main{padding:18px;}.tx-form{padding:13px;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Waste2Worth Transactions</title>
+  <style>
+    body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0;color:#184152;}
+    .transactions-main{max-width:1200px;margin:0 auto;padding:32px 10px;}
+    .t-header{font-size:2.2rem;font-weight:800;color:#21808d;margin-bottom:14px;}
+    .sub-desc{color:#53758c; margin-bottom:1.5em;}
+    .paygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:28px 23px;margin-bottom:36px;}
+    .pay-option,.bank-card{background:#fff;border-radius:13px;box-shadow:0 2px 13px #237b8e15;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 10px 19px;min-height:154px;cursor:pointer;border:2px solid #f6f9fa; transition:.1s;}
+    .pay-option.selected,.bank-card.selected{border:2.2px solid #1796d3;box-shadow:0 5px 19px #a7ddea45;}
+    .pay-option img,.bank-card img{max-height:53px;max-width:95px;margin-bottom:14px;border-radius:7px;}
+    .pay-option span,.bank-card span{font-size:1.08rem;color:#19757b;font-weight:600;text-align:center;}
+    .bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:15px;margin-bottom:26px;}
+    .section-title{font-size:1.13rem;font-weight:700;color:#21808d;margin:23px 0 10px;}
+    .emi-row{margin-bottom:18px;}
+    .emi-row label{margin-right:13px;}
+    .emi-select{padding:8px 14px;border-radius:8px;border:1.2px solid #b5c7d7;}
+    .divider{border-top:2px solid #d4e0e9;margin:34px 0;}
+    .modal{display:none;position:fixed;z-index:1001;left:0;top:0;width:100vw;height:100vh;background:rgba(44,77,91,0.18);}
+    .modal-content{background:#fff;margin:60px auto;padding:36px 21px 18px 21px;border-radius:15px;max-width:370px;box-shadow:0 6px 38px #1a89aa25;position:relative;}
+    .close-modal{position:absolute;top:9px;right:20px;color:#21808d;font-size:1.35rem;font-weight:700;cursor:pointer;}
+    .modal-content label{display:block;margin-bottom:3px;font-weight:500;}
+    .modal-content input,.modal-content select{width:100%;padding:8px 10px;margin-bottom:14px;border-radius:7px;border:1px solid #b6c4cc;font-size:1rem;}
+    .modal-content .modal-title{font-size:1.23rem;font-weight:700;color:#19757b;margin-bottom:16px;}
+    .modal-content .modal-img{display:block;margin:0 auto 18px auto;max-height:65px;}
+    .submit-btn{background:#21808d;color:#fff;border:none;font-weight:700;font-size:1.1rem;padding:10px 0;width:100%;border-radius:8px;transition:.13s;cursor:pointer;}
+    @media(max-width:700px){
+      .transactions-main{padding:16px 1.5vw;}
+      .paygrid,.bank-grid{grid-template-columns:1fr;}
+      .modal-content{max-width:97vw;}
+    }
+  </style>
 </head>
 <body>
-<div class="tx-main">
-  <h1>Transactions & Payment</h1>
-  <div class="sub">
-    Complete your transaction below. Please answer all fields. Payment options, delivery, and compliance questions included!
+<div class="transactions-main">
+  <div class="t-header">Transactions & Payments</div>
+  <div class="sub-desc">Select your preferred payment method. All transactions are secured and support popular banks, UPI, wallets, and EMI plans.</div>
+
+  <div class="section-title">Payment Options</div>
+  <div class="paygrid">
+    <div class="pay-option" onclick="openPaymentModal('phonepe')">
+      <img src="https://www.phonepe.com/webstatic/12359/static/PhonePe_vertical-16158be8710408f3561e1d07d01d5d89.png" alt="PhonePe"/>
+      <span>PhonePe</span>
+    </div>
+    <div class="pay-option" onclick="openPaymentModal('paytm')">
+      <img src="https://play-lh.googleusercontent.com/WDGsMRuVENnZPEpV4DEaXw12qtMY3em85xpmZqcXzeh0iT_eXFtAU9VUj-Z7xNQQd5DMqrkKSs9D0qbI1rlt" alt="Paytm"/>
+      <span>Paytm</span>
+    </div>
+    <div class="pay-option" onclick="openPaymentModal('ccdc')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Credit-cards.jpg/1200px-Credit-cards.jpg" alt="Credit/Debit Card"/>
+      <span>Credit/Debit Card</span>
+    </div>
+    <div class="pay-option" onclick="openPaymentModal('nb')">
+      <img src="https://payglocal.in/_next/image?url=%2Fblogs%2Fnet-banking-setup-features-benefits%2Fbanner.png&w=3840&q=75" alt="Net Banking"/>
+      <span>Net Banking / UPI</span>
+    </div>
   </div>
-  <form class="tx-form" onsubmit="event.preventDefault(); showSummary();">
-    <div class="form-group">
-      <label for="dealType">Are you <b>buying</b> or <b>selling</b>?</label>
-      <select id="dealType" required>
-        <option value="">Select...</option>
-        <option>Buying</option>
-        <option>Selling</option>
-      </select>
+  
+  <div class="divider"></div>
+  <div class="section-title">Select Your Bank</div>
+
+  <div class="bank-grid">
+    <div class="bank-card" onclick="selectBank('SBI','https://i.pinimg.com/736x/2a/2c/1d/2a2c1d90075390b22e7e6060254dab0d.jpg')">
+      <img src="https://i.pinimg.com/736x/2a/2c/1d/2a2c1d90075390b22e7e6060254dab0d.jpg" alt="SBI"/><span>SBI</span>
     </div>
-    <div class="form-group">
-      <label for="material">Material Type</label>
-      <input type="text" id="material" required placeholder="e.g., Plastic Pellets, E-waste, Cardboard"/>
+    <div class="bank-card" onclick="selectBank('ICICI','https://i.pinimg.com/736x/ff/d5/31/ffd531a6a78464512a97848e14506738.jpg')">
+      <img src="https://i.pinimg.com/736x/ff/d5/31/ffd531a6a78464512a97848e14506738.jpg" alt="ICICI"/><span>ICICI</span>
     </div>
-    <div class="form-group">
-      <label for="quantity">Quantity (kg)</label>
-      <input type="number" id="quantity" min="1" required placeholder="Enter quantity in kg"/>
+    <div class="bank-card" onclick="selectBank('HDFC','https://e7.pngegg.com/pngimages/257/159/png-clipart-hdfc-logo-thumbnail-bank-logos-thumbnail.png')">
+      <img src="https://e7.pngegg.com/pngimages/257/159/png-clipart-hdfc-logo-thumbnail-bank-logos-thumbnail.png" alt="HDFC"/><span>HDFC</span>
     </div>
-    <div class="form-group">
-      <label for="value">Deal Value (₹)</label>
-      <input type="number" id="value" min="1" required placeholder="Total value (₹)"/>
+    <div class="bank-card" onclick="selectBank('YesBank','https://upload.wikimedia.org/wikipedia/commons/a/a8/Yes_Bank_Logo_in_2024.png')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Yes_Bank_Logo_in_2024.png" alt="Yes Bank"/><span>Yes Bank</span>
     </div>
-    <div class="form-group">
-      <label for="counterparty">Counterparty (User/Company Name)</label>
-      <input type="text" id="counterparty" required/>
+    <div class="bank-card" onclick="selectBank('Axis','https://www.nfcw.com/wp-content/uploads/2020/06/axis-bank-logo.jpg')">
+      <img src="https://www.nfcw.com/wp-content/uploads/2020/06/axis-bank-logo.jpg" alt="Axis Bank"/><span>Axis Bank</span>
     </div>
-    <div class="form-group">
-      <label for="delivery">Delivery or Pickup Details</label>
-      <textarea id="delivery" required placeholder="Address, instructions, timings etc."></textarea>
+    <div class="bank-card" onclick="selectBank('Kotak','https://i.pinimg.com/736x/25/cb/6a/25cb6a6511acb87729cfcb4bc6798e20.jpg')">
+      <img src="https://i.pinimg.com/736x/25/cb/6a/25cb6a6511acb87729cfcb4bc6798e20.jpg" alt="Kotak"/><span>Kotak</span>
     </div>
-    <div class="form-group">
-      <label for="compliance">Compliance Checks</label>
-      <select id="compliance" required>
-        <option value="">Select compliance status</option>
-        <option>Material conforms to standards</option>
-        <option>Seller provided certification</option>
-        <option>No hazardous content</option>
-        <option>Requires further documentation</option>
-      </select>
-      <div class="compliance-info">Attach or upload compliance file via dashboard after submission.</div>
+    <div class="bank-card" onclick="selectBank('BankofBaroda','https://1000logos.net/wp-content/uploads/2021/06/Bank-of-Baroda-icon.png')">
+      <img src="https://1000logos.net/wp-content/uploads/2021/06/Bank-of-Baroda-icon.png" alt="Bank of Baroda"/><span>Bank of Baroda</span>
     </div>
-    <div class="form-group">
-      <label for="payment">Select Payment Method</label>
-      <div class="pay-methods">
-        <div class="pay-choice" onclick="selectPay('upi')" id="pay-upi">UPI</div>
-        <div class="pay-choice" onclick="selectPay('card')" id="pay-card">Credit/Debit Card</div>
-        <div class="pay-choice" onclick="selectPay('wallet')" id="pay-wallet">Digital Wallet</div>
-        <div class="pay-choice" onclick="selectPay('bank')" id="pay-bank">Bank Transfer</div>
-        <div class="pay-choice" onclick="selectPay('cod')" id="pay-cod">COD</div>
-        <div class="pay-choice" onclick="selectPay('crypto')" id="pay-crypto">Crypto (USDT/BTC)</div>
-      </div>
-      <input type="hidden" id="paymentMethod" name="paymentMethod" value="" required/>
-      <div class="payment-info" id="paymentInfo"></div>
-    </div>
-    <div class="form-group">
-      <label for="special">Special Instructions / Notes</label>
-      <textarea id="special" placeholder="E.g. require split delivery, specific test, insurance, etc."></textarea>
-    </div>
-    <button class="btn-submit" type="submit">Submit Transaction</button>
-  </form>
-  <div id="resultDemo"></div>
+  </div>
+
+  <div class="section-title">EMI Plans</div>
+  <div class="emi-row">
+    <label for="emiPlan">Choose EMI Duration:</label>
+    <select id="emiPlan" class="emi-select">
+      <option>No EMI</option>
+      <option>3 months @ 8.5% p.a.</option>
+      <option>6 months @ 10% p.a.</option>
+      <option>9 months @ 12% p.a.</option>
+      <option>12 months @ 13.5% p.a.</option>
+    </select>
+  </div>
 </div>
+
+<!-- Modal -->
+<div class="modal" id="pay-modal">
+  <div class="modal-content" id="modalContent">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
 <script>
-function selectPay(method) {
-  document.querySelectorAll('.pay-choice').forEach(el => el.classList.remove('selected'));
-  document.getElementById('pay-'+method).classList.add('selected');
-  document.getElementById('paymentMethod').value = method;
-  let txt = {
-    upi: "You'll be prompted to authorise payment via your preferred UPI app.",
-    card: "You can pay instantly using any major credit or debit card.",
-    wallet: "Supports Paytm, Google Pay, and more.",
-    bank: "NEFT/IMPS/RTGS accepted with automated confirmation.",
-    cod: "Pay on delivery/pickup to logistics partner.",
-    crypto: "Wallet details and QR will be shown after submission. Currently supports USDT/BTC."
-  }[method];
-  document.getElementById('paymentInfo').textContent = txt;
+let selectedBank = null, selectedBankLogo = null;
+
+function selectBank(bank, logoURL){
+  selectedBank = bank;
+  selectedBankLogo = logoURL;
+  document.querySelectorAll('.bank-card').forEach(el=>el.classList.remove('selected'));
+  let cards = document.querySelectorAll('.bank-card');
+  for(let c of cards){ 
+    if(c.innerText.includes(bank)){ c.classList.add('selected'); break; }
+  }
 }
 
-function showSummary() {
-  let vals = {};
-  ['dealType','material','quantity','value','counterparty','delivery','compliance','paymentMethod','special'].forEach(id => {
-    vals[id] = document.getElementById(id)?.value || "";
-  });
-  document.getElementById('resultDemo').innerHTML = `
-    <div class="summary"><b>Transaction Submitted!</b>
-      <br><br>
-      <b>Type:</b> ${vals.dealType}<br>
-      <b>Material:</b> ${vals.material}<br>
-      <b>Quantity:</b> ${vals.quantity} kg<br>
-      <b>Value:</b> ₹${vals.value}<br>
-      <b>Counterparty:</b> ${vals.counterparty}<br>
-      <b>Delivery:</b> ${vals.delivery}<br>
-      <b>Compliance:</b> ${vals.compliance}<br>
-      <b>Payment Method:</b> ${vals.paymentMethod.toUpperCase()}<br>
-      <b>Special Notes:</b> ${vals.special}
-      <br><br>
-      <span style="color:#1ca043;font-weight:600;">Next Steps:</span>
-      <ul>
-        <li>Check your email and dashboard for payment and order confirmation.</li>
-        <li>Download/attach compliance docs if needed.</li>
-        <li>Contact support if you need to modify or dispute this transaction.</li>
-      </ul>
-    </div>
-  `
-  document.querySelector("form").reset();
-  document.querySelectorAll('.pay-choice').forEach(el => el.classList.remove('selected'));
-  document.getElementById('paymentInfo').textContent = "";
+function tryPay(msg){
+  if(!selectedBank){
+    alert('Payment failed: Please select your bank before proceeding!');
+    return false;
+  }
+  closeModal();
+  alert(msg);
+  return true;
 }
+
+function openPaymentModal(type){
+  let modal = document.getElementById('pay-modal');
+  let body = document.getElementById('modalBody');
+  let emi = document.getElementById('emiPlan').value;
+
+  let chosenBank = selectedBank 
+    ? `<img src="${selectedBankLogo}" alt="${selectedBank}" class="modal-img" style="max-height:38px;margin-bottom:1em;"> <br/><b>${selectedBank}</b>`
+    : `<span style="color:#b89c3c">No bank selected</span>`;
+
+  let askBank = `
+    <div style="margin-bottom:1.2em">
+      <label>Selected Bank</label>
+      <div>${chosenBank}</div>
+    </div>
+  `;
+
+  let emiDetail = (emi !== "No EMI")
+    ? `<div style="margin-bottom:1em"><label>Selected EMI</label><div><b>${emi}</b></div></div>`
+    : "";
+
+  let form = "";
+
+  if(type==="phonepe"){
+    form = `
+      <img src="https://www.phonepe.com/webstatic/12359/static/PhonePe_vertical-16158be8710408f3561e1d07d01d5d89.png" class="modal-img"/>
+      <div class="modal-title">Pay with PhonePe</div>
+      ${askBank}
+      ${emiDetail}
+      <label>PhonePe Mobile/UPI ID</label>
+      <input required placeholder="Enter your PhonePe Number or UPI ID"/>
+      <button class="submit-btn" onclick="event.preventDefault();tryPay('PhonePe payment initiated');">Pay Now</button>`;
+  }
+
+  if(type==="paytm"){
+    form = `
+      <img src="https://play-lh.googleusercontent.com/WDGsMRuVENnZPEpV4DEaXw12qtMY3em85xpmZqcXzeh0iT_eXFtAU9VUj-Z7xNQQd5DMqrkKSs9D0qbI1rlt" class="modal-img"/>
+      <div class="modal-title">Pay with Paytm</div>
+      ${askBank}
+      ${emiDetail}
+      <label>Paytm Mobile</label>
+      <input required placeholder="Enter Paytm linked mobile"/>
+      <button class="submit-btn" onclick="event.preventDefault();tryPay('Paytm payment initiated');">Pay Now</button>`;
+  }
+
+  if(type==="ccdc"){
+    form = `
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Credit-cards.jpg/1200px-Credit-cards.jpg" class="modal-img"/>
+      <div class="modal-title">Credit / Debit Card</div>
+      ${askBank}
+      ${emiDetail}
+      <label>Card Number</label>
+      <input type="text" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" required/>
+      <label>Cardholder Name</label>
+      <input type="text" required/>
+      <label>Expiry (MM/YY) &nbsp; &nbsp; CVV</label>
+      <div style="display:flex;gap:10px;">
+        <input type="text" maxlength="5" placeholder="MM/YY" style="width:62px" required/>
+        <input type="number" maxlength="4" placeholder="CVV" style="width:55px" required/>
+      </div>
+      <button class="submit-btn" onclick="event.preventDefault();tryPay('Card payment submitted.');">Pay Now</button>`;
+  }
+
+  if(type==="nb"){
+    form = `
+      <img src="https://payglocal.in/_next/image?url=%2Fblogs%2Fnet-banking-setup-features-benefits%2Fbanner.png&w=3840&q=75" class="modal-img"/>
+      <div class="modal-title">Net Banking / UPI</div>
+      ${askBank}
+      ${emiDetail}
+      <label>NetBanking/UPI ID</label>
+      <input type="text" placeholder="Enter UPI or NetBanking ID" required/>
+      <button class="submit-btn" onclick="event.preventDefault();tryPay('UPI/NetBanking payment initiated.');">Pay Now</button>`;
+  }
+
+  body.innerHTML = form;
+  modal.style.display = "block";
+}
+
+function closeModal(){
+  document.getElementById('pay-modal').style.display="none";
+}
+
+window.onclick = function(event){
+  let p = document.getElementById('pay-modal');
+  if(event.target === p){ closeModal(); }
+};
 </script>
+
 </body>
 </html>

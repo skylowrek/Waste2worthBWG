@@ -21,8 +21,8 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
 .card-title{font-size:1.3rem;font-weight:700;color:#16747b;}
 .card-sub{color:#19b978;margin-bottom:7px;}
 .card-meta{font-size:1.03rem;color:#689195;display:flex;flex-wrap:wrap;gap:14px;margin-bottom:8px;}
-.badges{margin-bottom:6px;}
-.badge{display:inline-block;background:#d8fbe7;color:#128070;border-radius:12px;padding:5px 13px;font-size:.95rem;margin-right:7px;}
+.badges{margin-bottom:7px;}
+.badge{display:inline-block;background:#d8fbe7;color:#128070;border-radius:12px;padding:5px 13px;font-size:.96rem;margin-right:7px;}
 .badge.eco{background:#d8fbe7;color:#217e36;}
 .badge.trending{background:#ffe4b6;color:#cd9532;}
 .badge.urgent{background:#fbe7e7;color:#c2292e;}
@@ -30,15 +30,22 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
 .card-body{padding:0 26px;}
 .eco-impact{margin:8px 0 5px 0;}
 .card-actions{margin-top:17px;display:flex;justify-content:flex-end;gap:11px;padding:0 26px;}
-.btn{border:none;padding:8px 18px;border-radius:8px;font-weight:700;font-size:.98rem;cursor:pointer;transition:.1s;}
+.btn{border:none;padding:8px 17px;border-radius:8px;font-weight:700;font-size:.98rem;cursor:pointer;transition:.1s;}
 .btn.primary{background:#21808d;color:white;}
 .btn.secondary{background:#ebf7fc;color:#21808d;border:1.5px solid #21808d;}
 .btn.ghost{background:transparent;color:#21808d;}
-.negotiation-helper{margin-top:10px;}
-.neg-box{display:flex;gap:7px;margin-top:7px;}
-.neg-input{flex:1;padding:8px 13px;border-radius:7px;border:1px solid #c9dbde;font-size:1rem;}
-.neg-btn{background:#19b978;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:600;}
-.neg-suggestion{margin-top:7px;padding:7px 13px;background:#f6ffe2;color:#597526;border-radius:8px;font-size:.97rem;}
+.negotiation-helper{margin-top:10px;display:flex;gap:7px;}
+.neg-input{flex:1;padding:8px 12px;border-radius:7px;border:1px solid #c9dbde;font-size:1rem;max-width:220px;}
+/* AI Suggest popover */
+.suggestion-pop {
+    position:absolute; left:15px; top:97px; z-index:40; min-width:250px; max-width:330px;
+    background:#f6ffe2; box-shadow:0 4px 16px #bfdc7c44; color:#597526;border-radius:10px;
+    font-size:.97rem;padding:9px 13px 10px 15px;display:none; animation:fadein .2s;
+}
+.suggestion-pop .close-sugg{
+    float:right; color:#809523; font-weight:700; font-size:1.1rem; border:none; background:none; cursor:pointer;
+}
+@keyframes fadein {from{opacity:0} to{opacity:1} }
 .section-title{font-size:1.23rem;font-weight:700;color:#21808d;margin:24px 0 10px;}
 .recommend{margin-bottom:30px;}
 .rec-head{font-weight:600;color:#19b978;font-size:1rem;}
@@ -49,14 +56,30 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
 .widget{background:#fff;box-shadow:0 1px 6px #21808d10;padding:18px 32px;border-radius:13px;}
 .widget-title{color:#21808d;font-weight:700;}
 .widget-value{font-size:1.21rem;font-weight:700;color:#16747b;}
-@media (max-width:900px){.live-listings{grid-template-columns:1fr;}
-.market-insights,.stats-widgets{ flex-direction:column;gap:14px;} }
+/* Modal styles */
+.modal {display:none;position:fixed;z-index:1000;left:0;top:0;width:100vw;height:100vh;overflow:auto;background:rgba(44,77,91,0.13);}
+.modal-content{background:#fff;margin:60px auto;padding:34px 25px 25px 25px;border-radius:15px;max-width:390px;box-shadow:0 6px 38px #1a89aa25;position:relative;}
+.close-modal{position:absolute;top:12px;right:21px;color:#21808d;font-size:1.45rem;cursor:pointer;font-weight:700;}
+.modal input, .modal textarea{width:100%;margin-bottom:13px;padding:10px;border-radius:7px;border:1px solid #c9dbde;font-size:1rem;}
+.modal label{font-size:.97rem;}
+.modal button[type="submit"]{margin-top:7px; width:100%;}
+@media (max-width:900px){
+  .live-listings{grid-template-columns:1fr;}
+  .market-insights,.stats-widgets{flex-direction:column;gap:14px;}
+}
+@media (max-width:550px){
+  .marketplace-main{padding:11px 2px 27px;}
+  .header-main{font-size:1.33rem;}
+  .card-header{padding:14px 8px 0 10px;}
+  .card-body,.card-actions{padding:0 10px;}
+  .modal-content{max-width:98vw;}
+  .suggestion-pop{min-width:90vw;max-width:96vw;left:3vw;}
+}
 </style>
 </head>
 <body>
 <div class="marketplace-main">
   <div class="header-main">Marketplace</div>
-
   <!-- Market Insights-->
   <div class="market-insights">
     <div class="m-summary">Plastic Pellets and Cardboard are trending. Verified eco-friendly sellers get 8% higher offers. CO₂ savings on aluminium sales up 5% this week.</div>
@@ -66,7 +89,6 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
       <div class="m-prbox"><span class="label">Cardboard</span><span>₹15.5/kg</span></div>
     </div>
   </div>
-
   <!-- Stats widgets (market analytics) -->
   <div class="stats-widgets">
     <div class="widget">
@@ -90,7 +112,6 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
       <div class="widget-value">35022 kg</div>
     </div>
   </div>
-
   <!-- Trending Section -->
   <div class="section-title">Trending Materials</div>
   <div>
@@ -99,7 +120,6 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
     <span class="trending-chip">E-waste</span>
     <span class="trending-chip">Cardboard</span>
   </div>
-
   <!-- Recommendations -->
   <div class="recommend">
     <div class="rec-head">Recommended for you:</div>
@@ -109,12 +129,11 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
       <div class="rec-item">Sell Cardboard</div>
     </div>
   </div>
-
   <!-- Marketplace Listings -->
   <div class="section-title">Live Listings</div>
   <section class="live-listings">
-    <!-- Card 1: Eco, trending, verified, CO2 badge -->
-    <div class="card">
+    <!-- Card 1 -->
+    <div class="card" data-card-id="0" style="position:relative;">
       <div class="card-header">
         <div class="card-title">Plastic Pellets <span class="card-sub">Seller</span></div>
         <div class="card-meta">
@@ -132,18 +151,20 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
         <div class="eco-impact">CO₂ Saving: <b>110</b> kg</div>
         <div class="negotiation-helper">
           <input class="neg-input" type="text" placeholder="Propose a price or delivery..."/>
-          <button class="neg-btn" onclick="showSuggestion(this, 0)">AI Suggest</button>
+          <button class="btn secondary" type="button" onclick="showSuggestion(0,this)">AI Suggest</button>
         </div>
-        <div class="neg-suggestion" id="sugg-0" style="display:none">How about splitting the deal at ₹80/kg for half the volume?</div>
       </div>
       <div class="card-actions">
-        <button class="btn primary">Contact</button>
-        <button class="btn secondary" onclick="showSuggestion(this, 0)">Negotiate</button>
-        <button class="btn ghost">Report</button>
+        <button class="btn primary" onclick="openModal('contact',0)">Contact</button>
+        <button class="btn secondary" onclick="openModal('negotiate',0)">Negotiate</button>
+        <button class="btn ghost" onclick="openModal('report',0)">Report</button>
+      </div>
+      <div class="suggestion-pop" id="sugg-pop-0"><span class="close-sugg" onclick="closeSuggestion(0)">&times;</span>
+        <b>AI Suggestion: </b>How about splitting the deal at ₹80/kg for half the volume?
       </div>
     </div>
     <!-- Card 2 -->
-    <div class="card">
+    <div class="card" data-card-id="1" style="position:relative;">
       <div class="card-header">
         <div class="card-title">Aluminium Scrap <span class="card-sub">Seller</span></div>
         <div class="card-meta">
@@ -160,18 +181,20 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
         <div class="eco-impact">CO₂ Saving: <b>320</b> kg</div>
         <div class="negotiation-helper">
           <input class="neg-input" type="text" placeholder="Propose a price..."/>
-          <button class="neg-btn" onclick="showSuggestion(this, 1)">AI Suggest</button>
+          <button class="btn secondary" type="button" onclick="showSuggestion(1,this)">AI Suggest</button>
         </div>
-        <div class="neg-suggestion" id="sugg-1" style="display:none">Try bidding ₹117/kg and offer immediate pickup.</div>
       </div>
       <div class="card-actions">
-        <button class="btn primary">Contact</button>
-        <button class="btn secondary" onclick="showSuggestion(this, 1)">Negotiate</button>
-        <button class="btn ghost">Report</button>
+        <button class="btn primary" onclick="openModal('contact',1)">Contact</button>
+        <button class="btn secondary" onclick="openModal('negotiate',1)">Negotiate</button>
+        <button class="btn ghost" onclick="openModal('report',1)">Report</button>
+      </div>
+      <div class="suggestion-pop" id="sugg-pop-1"><span class="close-sugg" onclick="closeSuggestion(1)">&times;</span>
+        <b>AI Suggestion: </b>Try bidding ₹117/kg and offer immediate pickup.
       </div>
     </div>
     <!-- Card 3 -->
-    <div class="card">
+    <div class="card" data-card-id="2" style="position:relative;">
       <div class="card-header">
         <div class="card-title">Cardboard <span class="card-sub">Buyer</span></div>
         <div class="card-meta">
@@ -187,24 +210,113 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
         <div class="eco-impact">CO₂ Saving: <b>--</b> kg</div>
         <div class="negotiation-helper">
           <input class="neg-input" type="text" placeholder="Counter price or volume..."/>
-          <button class="neg-btn" onclick="showSuggestion(this, 2)">AI Suggest</button>
+          <button class="btn secondary" type="button" onclick="showSuggestion(2,this)">AI Suggest</button>
         </div>
-        <div class="neg-suggestion" id="sugg-2" style="display:none">Buyer may accept a bundled delivery at ₹16.5/kg.</div>
       </div>
       <div class="card-actions">
-        <button class="btn primary">Contact</button>
-        <button class="btn secondary" onclick="showSuggestion(this, 2)">Negotiate</button>
-        <button class="btn ghost">Report</button>
+        <button class="btn primary" onclick="openModal('contact',2)">Contact</button>
+        <button class="btn secondary" onclick="openModal('negotiate',2)">Negotiate</button>
+        <button class="btn ghost" onclick="openModal('report',2)">Report</button>
+      </div>
+      <div class="suggestion-pop" id="sugg-pop-2"><span class="close-sugg" onclick="closeSuggestion(2)">&times;</span>
+        <b>AI Suggestion: </b>Buyer may accept a bundled delivery at ₹16.5/kg.
       </div>
     </div>
-    <!-- Add more dummy cards as needed -->
   </section>
+  <!-- MODALS (negotiation/contact/report, one instance, dynamic content) -->
+  <div class="modal" id="main-modal">
+    <div class="modal-content" id="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
 </div>
 <script>
-// Show a fixed "AI suggestion" for the corresponding card (simulate backend call)
-function showSuggestion(btn, idx) {
-  document.querySelectorAll('.neg-suggestion').forEach(e => e.style.display='none');
-  document.getElementById("sugg-"+idx).style.display = "";
+const modal = document.getElementById('main-modal');
+const modalBody = document.getElementById('modal-body');
+// Per-card sample data
+const cardData = [
+  {
+    title: "Plastic Pellets Seller",
+    location: "Delhi",
+    volume: "500 kg",
+    price: "₹82/kg",
+    co2: "110 kg",
+    type: "seller"
+  },
+  {
+    title: "Aluminium Scrap Seller",
+    location: "Mumbai",
+    volume: "900 kg",
+    price: "₹120/kg",
+    co2: "320 kg",
+    type: "seller"
+  },
+  {
+    title: "Cardboard Buyer",
+    location: "Bangalore",
+    volume: "1200 kg",
+    price: "₹17/kg bid",
+    co2: "--",
+    type: "buyer"
+  }
+];
+const suggestText = [
+  "How about splitting the deal at ₹80/kg for half the volume?",
+  "Try bidding ₹117/kg and offer immediate pickup.",
+  "Buyer may accept a bundled delivery at ₹16.5/kg."
+];
+
+function openModal(type, cardId) {
+  let c = cardData[cardId];
+  closeAllSuggestions(); // Just in case, hide suggestion
+  if(type==='contact') {
+    modalBody.innerHTML = `<h3 style="font-size:1.16rem;margin-bottom:.6em;">Contact ${c.title}</h3>
+      <form autocomplete="off">
+        <label>Your Name</label>
+        <input required placeholder="Full Name" /><br/>
+        <label>Email or Phone</label>
+        <input required placeholder="Email or Mobile"/><br/>
+        <label>Message</label>
+        <textarea rows="3" required>Interested in your ${c.title.split(' ')[0]} at ${c.price}. Please share more details.</textarea><br/>
+        <button type="submit" class="btn primary" onclick="event.preventDefault();closeModal();alert('Message sent!')">Send</button>
+      </form>`;
+  }
+  if(type==='negotiate') {
+    modalBody.innerHTML = `<h3 style="font-size:1.16rem;margin-bottom:.65em;">Negotiate with ${c.title}</h3>
+      <form autocomplete="off">
+        <label>Your Offer (Price or Terms)</label>
+        <input required placeholder="e.g. ₹${parseInt(c.price)||''}/kg for half the lot"/><br/>
+        <button type="submit" class="btn secondary" onclick="event.preventDefault();closeModal();alert('Offer submitted!')">Propose Offer</button>
+      </form>`;
+  }
+  if(type==='report') {
+    modalBody.innerHTML = `<h3 style="font-size:1.13rem;margin-bottom:.55em;">Report ${c.title}</h3>
+      <form autocomplete="off">
+        <label>Reason</label><input placeholder="Reason for report" required/><br/>
+        <label>Details</label><textarea rows="3"></textarea><br/>
+        <button type="submit" class="btn ghost" onclick="event.preventDefault();closeModal();alert('Thank you for your report!')">Submit Report</button>
+      </form>`;
+  }
+  modal.style.display = "block";
+}
+function closeModal() {
+  modal.style.display = "none";
+  modalBody.innerHTML = "";
+}
+window.onclick = function(event) {
+  if (event.target === modal) closeModal();
+};
+// AI Suggest popover logic
+function showSuggestion(idx,btn) {
+  closeAllSuggestions();
+  document.getElementById("sugg-pop-"+idx).style.display = "block";
+}
+function closeSuggestion(idx){
+  document.getElementById("sugg-pop-"+idx).style.display="none";
+}
+function closeAllSuggestions() {
+  document.querySelectorAll('.suggestion-pop').forEach(el=>el.style.display="none");
 }
 </script>
 </body>
