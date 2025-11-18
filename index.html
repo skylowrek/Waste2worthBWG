@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="navbar__content">
@@ -25,6 +24,7 @@
                     <a href="transactions.html" class="navbar__link">Transactions</a>
                     <a href="impact.html" class="navbar__link">Impact</a>
                     <a href="scanner.html" class="navbar__link">Scanner</a>
+                    <a href="contact.html" class="navbar__link">Contact Us</a>
                     <a href="signup.html" class="btn btn--outline">Create Account</a>
                     <a href="signin.html" class="btn btn--primary">Sign In</a>
 
@@ -40,12 +40,9 @@
         </div>
     </nav>
 
-    <!-- Main Container -->
     <main class="main-content">
         <div class="container">
-            <!-- Producer View -->
             <div id="producerView" class="view-container active">
-                <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="hero-content">
                         <h1 class="hero-title">Welcome to Your Producer Dashboard</h1>
@@ -67,7 +64,6 @@
                     </div>
                 </section>
 
-                <!-- Quick Actions -->
                 <section class="section">
                     <div class="quick-actions">
                         <button class="action-card" id="openWasteStreamModal">
@@ -110,7 +106,6 @@
                     </div>
                 </section>
 
-                <!-- Waste Streams Overview -->
                 <section class="section">
                     <div class="section__header">
                         <h2>My Waste Streams</h2>
@@ -125,12 +120,10 @@
 
                     <div class="grid grid--3" id="wasteStreamsContainer">
                         <div id="wasteStreamsList">
-                            <!-- Dynamic content -->
-                        </div>
+                            </div>
                     </div>
                 </section>
 
-                <!-- Active Listings -->
                 <section class="section">
                     <div class="section__header">
                         <h2>Active Marketplace Listings</h2>
@@ -143,11 +136,9 @@
                     </div>
 
                     <div class="listings-grid" id="producerListings">
-                        <!-- Dynamic listings -->
-                    </div>
+                        </div>
                 </section>
 
-                <!-- Recent Offers -->
                 <section class="section">
                     <div class="section__header">
                         <h2>Recent Offers & Bids</h2>
@@ -166,13 +157,11 @@
                                 </tr>
                             </thead>
                             <tbody id="offersTable">
-                                <!-- Dynamic offers -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </section>
 
-                <!-- Compliance & Impact -->
                 <section class="section">
                     <h2>Compliance & Environmental Impact</h2>
                     <div class="grid grid--2">
@@ -183,8 +172,7 @@
                             </div>
                             <div class="card__body">
                                 <div id="transferNotesList">
-                                    <!-- Dynamic transfer notes -->
-                                </div>
+                                    </div>
                             </div>
                         </div>
                         <div class="card card--success">
@@ -222,9 +210,7 @@
                 </section>
             </div>
 
-            <!-- Buyer View -->
             <div id="buyerView" class="view-container">
-                <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="hero-content">
                         <h1 class="hero-title">Welcome to Your Buyer Dashboard</h1>
@@ -246,7 +232,6 @@
                     </div>
                 </section>
 
-                <!-- Quick Actions -->
                 <section class="section">
                     <div class="quick-actions">
                         <button class="action-card" id="openSourcingProfileModal">
@@ -289,7 +274,6 @@
                     </div>
                 </section>
 
-                <!-- Sourcing Profile -->
                 <section class="section">
                     <div class="section__header">
                         <h2>Material Requirements</h2>
@@ -303,24 +287,20 @@
                     <div class="card">
                         <div class="card__body">
                             <div id="sourcingProfileList">
-                                <!-- Dynamic content -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Custom Alerts -->
                 <section class="section">
                     <div class="section__header">
                         <h2>Active Alerts & Notifications</h2>
                         <span class="badge badge--primary" id="alertsCount">0 Active</span>
                     </div>
                     <div class="alerts-container" id="alertsList">
-                        <!-- Dynamic alerts -->
-                    </div>
+                        </div>
                 </section>
 
-                <!-- Available Listings -->
                 <section class="section">
                     <div class="section__header">
                         <h2>Available Materials Marketplace</h2>
@@ -361,22 +341,18 @@
                     </div>
 
                     <div class="listings-grid" id="buyerListings">
-                        <!-- Dynamic listings -->
-                    </div>
+                        </div>
                 </section>
 
-                <!-- Negotiation Dashboard -->
                 <section class="section">
                     <div class="section__header">
                         <h2>Active Negotiations</h2>
                         <span class="badge badge--warning" id="negotiationsCount">0 Active</span>
                     </div>
                     <div class="negotiations-container" id="negotiationsList">
-                        <!-- Dynamic negotiations -->
-                    </div>
+                        </div>
                 </section>
 
-                <!-- Impact Dashboard -->
                 <section class="section">
                     <h2>My Environmental Impact</h2>
                     <div class="grid grid--3">
@@ -430,8 +406,7 @@
             </div>
         </div>
     </main>
-    <!-- Spectacular Website Creators Section -->
-<style>
+    <style>
 .creators-prof-section {
   background: linear-gradient(120deg, #e9fbf1 60%, #d0f0ea 100%);
   border-radius: 19px;
@@ -516,7 +491,6 @@
   .creators-prof-section{padding:16px 0;}
 }
 </style>
-<!-- Creators Section: insert this before the footer, after your main content -->
 <section class="creators-prof-section">
   <div class="creators-prof-title">Website Creators</div>
   <div class="creators-card-row">
@@ -575,7 +549,6 @@
 
 
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -619,13 +592,10 @@
         </div>
     </footer>
 
-    <!-- Modal Container -->
     <div id="modalContainer"></div>
 
-    <!-- React Root for Advanced Components -->
     <div id="reactRoot"></div>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="app.js"></script>

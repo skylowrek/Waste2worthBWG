@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - Waste2Worth</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styling to center the content, similar to auth pages but adapted for a content card */
+        .contact-bg {
+            min-height: 100vh;
+            background: #fafaf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+
+        .contact-card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 7px 32px #15829c17;
+            padding: 36px 28px 38px 28px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .contact-card h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #194243;
+            letter-spacing: .02em;
+        }
+
+        .contact-motto {
+            font-size: 1.15rem;
+            color: #36595c;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .contact-details {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .contact-details div {
+            margin-bottom: 15px;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e7eae9;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-details strong {
+            display: inline-block;
+            min-width: 100px;
+            color: #15829c;
+        }
+
+        .contact-input,
+        .contact-textarea {
+            width: 100%;
+            margin-bottom: 22px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            border: 1px solid #e7eae9;
+            padding: 13px 18px;
+            background: #fcfcfa;
+            color: #194243;
+            transition: border 0.16s;
+            resize: vertical;
+        }
+
+        .contact-input:focus,
+        .contact-textarea:focus {
+            border-color: #15829c;
+            outline: none;
+            background: #f7fafb;
+        }
+
+        .contact-btn {
+            width: 100%;
+            background: #19b978;
+            /* Green for contact button */
+            color: #fff;
+            font-size: 1.24rem;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            margin-top: 12px;
+            cursor: pointer;
+            letter-spacing: .02em;
+            box-shadow: 0 2px 8px #19b97822;
+            transition: background 0.15s;
+        }
+
+        .contact-btn:hover {
+            background: #14a36b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contact-bg">
+        <div class="contact-card">
+            <h1>Contact Waste2Worth</h1>
+            <div class="contact-motto">"Transforming waste streams into revenue opportunities."</div>
+
+            <div class="contact-details">
+                <div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15829c" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2 2h-3a20 20 0 0 1-20-20v-3a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2 10 10 0 0 0 10 10z" />
+                    </svg>
+                    <strong>Phone:</strong> +91 98765 43210
+                </div>
+                <div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15829c" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    <strong>Email:</strong> support@waste2worth.com
+                </div>
+                <div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15829c" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <strong>Office:</strong> Waste2Worth HQ, New Delhi, India
+                </div>
+                <div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15829c" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 19c-3.8 0-7-3.2-7-7s3.2-7 7-7 7 3.2 7 7-3.2 7-7 7z" />
+                        <polyline points="12 10 12 12 14 14" />
+                    </svg>
+                    <strong>Hours:</strong> Mon - Fri, 9:00 AM - 6:00 PM IST
+                </div>
+            </div>
+
+            <form id="contactForm">
+                <h3 style="color:#194243;margin-bottom:20px;">Send us a message</h3>
+                <input type="text" id="contactName" class="contact-input" placeholder="Your Full Name" required>
+                <input type="email" id="contactEmail" class="contact-input" placeholder="Your Email Address" required>
+                <textarea id="contactMessage" class="contact-textarea" placeholder="Your Message or Inquiry" rows="4"
+                    required></textarea>
+                <button type="submit" class="contact-btn">Submit Inquiry</button>
+            </form>
+            <div style="font-size: 0.9rem; color: #53758c; margin-top: 15px;">We typically respond within 1 business
+                day.</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+
+            // Dummy action for demo
+            alert(`Thank you, ${name}! Your inquiry has been received. We will respond to ${email} shortly.`);
+
+            // Clear the form for a real implementation
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+</body>
+
+</html>
