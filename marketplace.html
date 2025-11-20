@@ -5,7 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Waste2Worth Marketplace</title>
 <style>
-body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; color:#184152;}
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family:'Segoe UI',Arial,sans-serif;
+    color:#184152;
+    background: url('website_background.png') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #f7faf9;
+    position: relative;
+}
+/* Semi-transparent white overlay for readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255,255,255,0.60); /* You can adjust 0.60 for more/less overlay */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Make sure main content is above overlay */
+.marketplace-main,
+.header-main, .market-insights, .stats-widgets, .section-title, .recommend, .rec-head, .rec-list, .live-listings, .footer, .modal {
+    position: relative;
+    z-index: 1;
+}
+
 .marketplace-main{max-width:1300px;margin:0 auto;padding:30px 16px 70px;}
 .header-main{font-size:2.2rem;font-weight:800;color:#21808d;margin-bottom:7px;}
 .market-insights{margin:23px 0 18px;padding:18px 22px;border-radius:12px;background:#e6eefd;box-shadow:0 2px 15px #237b8e14;display:flex;gap:38px; flex-wrap:wrap;}
@@ -132,6 +162,8 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
   <!-- Marketplace Listings -->
   <div class="section-title">Live Listings</div>
   <section class="live-listings">
+    <!-- Cards and listings go here (see your original HTML for this section) -->
+    <!-- ... unchanged content ... -->
     <!-- Card 1 -->
     <div class="card" data-card-id="0" style="position:relative;">
       <div class="card-header">
@@ -234,7 +266,6 @@ body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0; co
 <script>
 const modal = document.getElementById('main-modal');
 const modalBody = document.getElementById('modal-body');
-// Per-card sample data
 const cardData = [
   {
     title: "Plastic Pellets Seller",
@@ -269,7 +300,7 @@ const suggestText = [
 
 function openModal(type, cardId) {
   let c = cardData[cardId];
-  closeAllSuggestions(); // Just in case, hide suggestion
+  closeAllSuggestions();
   if(type==='contact') {
     modalBody.innerHTML = `<h3 style="font-size:1.16rem;margin-bottom:.6em;">Contact ${c.title}</h3>
       <form autocomplete="off">

@@ -1585,3 +1585,4 @@ style.textContent = `
 document.head.appendChild(style);
 
 console.log('🌱 Waste2Worth App.js Loaded Successfully');
+

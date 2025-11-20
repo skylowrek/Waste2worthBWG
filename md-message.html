@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MD's Message | Waste2Worth</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: url('website_background.png') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f9fafc;
+      color: #185963;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      position: relative;
+    }
+    /* Overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.60);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .md-section, footer {
+      position: relative;
+      z-index: 1;
+    }
+    .md-section {
+      max-width: 900px;
+      margin: 60px auto 0 auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 5px 40px #129a8220;
+      padding: 40px 32px;
+      position: relative;
+    }
+    .md-header {
+      display: flex; align-items: center; gap: 34px; margin-bottom: 18px;
+    }
+    .md-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 16px #23dbac20;
+      background: #eafbf5;
+    }
+    .md-title {
+      font-size: 2.25rem; font-weight: 800; color: #15927b; letter-spacing: -.018em;
+    }
+    .md-message {
+      margin: 38px 0 0 0;
+    }
+    .crisis-list {
+      margin: 32px 0 32px 0;
+      padding-left: 18px;
+    }
+    .crisis-list li {
+      background: #eafbf5;
+      border-left: 6px solid #23bdb8;
+      margin-bottom: 13px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      font-weight: 550;
+      font-size: 1.09rem;
+      color: #187c66;
+      box-shadow: 0 1px 8px #23dbac12;
+    }
+    .md-highlight {
+      background: linear-gradient(110deg, #45CED6 77%, #fff 100%);
+      font-size: 1.18rem; font-weight: 570;
+      color: #166c53;
+      padding: 23px 30px; border-radius: 14px;
+      box-shadow: 0 2px 14px #23dbac20; margin-bottom: 24px;
+      margin-top: 8px;
+    }
+    .md-user-boxes {
+      display: flex; gap: 26px; flex-wrap: wrap; margin-bottom: 18px; margin-top: 20px;
+      justify-content: center;
+    }
+    .md-user-box {
+      background:#e5f7f7; border-radius:14px; padding:22px 16px;
+      flex:1 1 280px; min-width:240px; max-width:310px;
+      box-shadow:0 2px 12px #17bfaab2;
+    }
+    .md-user-title {
+      color: #15927b; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px;
+    }
+    .md-user-desc {
+      color: #198183; font-size: 0.98rem;
+    }
+    .md-origin {
+      margin: 36px 0 18px 0; color: #174c4d; background: #f4f6fa; border-radius:13px; padding:15px 14px; font-weight:540;
+    }
+    .md-signature {
+      margin-top: 30px; text-align: right; color: #189e95; font-size:1.09rem; font-style:italic; font-weight:600; letter-spacing:.01em;
+    }
+    @media (max-width:700px){
+      .md-section { padding:20px 4vw; }
+      .md-header{ flex-direction:column; align-items:flex-start;}
+      .md-user-boxes{ flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="md-section">
+    <div class="md-header">
+      <img src="ashu_photo1.jpeg" alt="MD Image" class="md-avatar">
+      <div class="md-title">MD's Message: Uniting the Scattered</div>
+    </div>
+    <div class="md-message">
+      <p>
+        In every busy city, thriving factory, or bustling restaurant, there exists a daily struggle: waste materials pile up, yet the users who need them most are often unaware, disconnected, and left searching for solutions. <strong>Waste2Worth</strong> was created to unite what’s scattered—to transform crisis into opportunity through intelligent technology and meaningful collaboration.
+      </p>
+      <div class="md-highlight">
+        Today, we stand at a crossroads. Landfills overflow, supply chains are fragmented, and valuable resources go to waste. The next leap is possible: to build a digital marketplace powered by AI, designed for everyone—producers, seekers, communities.
+      </div>
+
+      <ul class="crisis-list">
+        <li>Most valuable byproducts are discarded rather than reused, due to lack of marketplace visibility and connections.</li>
+        <li>Buyers and sellers spend hours negotiating, uncertain about compliance, quality, or logistics.</li>
+        <li>Material availability is unpredictable, and procurement is siloed, raising costs and barriers.</li>
+        <li>Daily waste management remains manual and static, even as our cities and industries demand smarter, eco-friendly processes.</li>
+      </ul>
+
+      <section class="md-user-boxes">
+        <div class="md-user-box">
+          <div class="md-user-title">Waste Producers: Seeking Impact & Compliance</div>
+          <div class="md-user-desc">From restaurants and furniture makers to industrial plants, our producers want reliable ways to turn waste responsibility into revenue while meeting ecological mandates.</div>
+        </div>
+        <div class="md-user-box">
+          <div class="md-user-title">Waste Users: Searching for Quality Feed</div>
+          <div class="md-user-desc">Biogas plants, recyclers, manufacturers, all look for consistent and local supply to improve costs, sustainability, and supply chain resilience.</div>
+        </div>
+      </section>
+
+      <div class="md-origin">
+        Waste2Worth started by embracing the pain points—seeing that system inefficiency and lack of integration were wasting opportunity. Our inspiration comes from the circular economy, where industrial symbiosis isn’t just theory, but a living reality. By connecting businesses with technology, we create a B2B platform where waste is never "just garbage" but the beginning of something new.
+      </div>
+
+      <div class="md-highlight">
+        <strong>Our AI platform solves discovery, automates match-making, and streamlines logistics:</strong> Imagine scanning your waste with your camera, having it recognized and traced instantly; negotiating and collaborating in real time; watching your contribution to landfill diversion and CO₂ reduction appear on your dashboard.<br>
+        Everything that scatters, we unite—one listing, one transaction, one network at a time.
+      </div>
+      <p>
+        Waste2Worth is not just about compliance or cost savings. It is about leadership in a new era: transforming how we view, value, and transact waste—with intelligence, connectivity, and community at its heart.
+      </p>
+    </div>
+    <div class="md-signature">
+      Aditya Ranjan<br>
+      Managing Director, Waste2Worth
+    </div>
+  </main>
+  <footer class="footer" style="background:#eafbf5; border-top:1px solid #bee7e3; text-align:center; font-size:1.07rem; color:#148c93; padding:18px 0; margin-top:40px;">
+    &copy; 2025 Waste2Worth - United for a Smarter Tomorrow.
+  </footer>
+</body>
+</html>

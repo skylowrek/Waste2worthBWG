@@ -5,7 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Waste2Worth Transactions</title>
   <style>
-    body { background:#f6f9fa; font-family:'Segoe UI',Arial,sans-serif; margin:0;color:#184152;}
+    body {
+      background: url('website_background.png') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f7faf9;
+      font-family:'Segoe UI',Arial,sans-serif;
+      margin:0;
+      color:#184152;
+      min-height: 100vh;
+      position: relative;
+    }
+    /* Semi-transparent white overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.60); /* adjust for more/less overlay */
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* All actual content stays above overlay */
+    .transactions-main, .t-header, .sub-desc, .paygrid, .section-title, .bank-grid, .divider, .emi-row, .modal {
+      position: relative;
+      z-index: 1;
+    }
     .transactions-main{max-width:1200px;margin:0 auto;padding:32px 10px;}
     .t-header{font-size:2.2rem;font-weight:800;color:#21808d;margin-bottom:14px;}
     .sub-desc{color:#53758c; margin-bottom:1.5em;}
@@ -20,6 +44,7 @@
     .emi-row label{margin-right:13px;}
     .emi-select{padding:8px 14px;border-radius:8px;border:1.2px solid #b5c7d7;}
     .divider{border-top:2px solid #d4e0e9;margin:34px 0;}
+    /* Modal Styles */
     .modal{display:none;position:fixed;z-index:1001;left:0;top:0;width:100vw;height:100vh;background:rgba(44,77,91,0.18);}
     .modal-content{background:#fff;margin:60px auto;padding:36px 21px 18px 21px;border-radius:15px;max-width:370px;box-shadow:0 6px 38px #1a89aa25;position:relative;}
     .close-modal{position:absolute;top:9px;right:20px;color:#21808d;font-size:1.35rem;font-weight:700;cursor:pointer;}
@@ -39,7 +64,6 @@
 <div class="transactions-main">
   <div class="t-header">Transactions & Payments</div>
   <div class="sub-desc">Select your preferred payment method. All transactions are secured and support popular banks, UPI, wallets, and EMI plans.</div>
-
   <div class="section-title">Payment Options</div>
   <div class="paygrid">
     <div class="pay-option" onclick="openPaymentModal('phonepe')">
@@ -59,10 +83,8 @@
       <span>Net Banking / UPI</span>
     </div>
   </div>
-  
   <div class="divider"></div>
   <div class="section-title">Select Your Bank</div>
-
   <div class="bank-grid">
     <div class="bank-card" onclick="selectBank('SBI','https://i.pinimg.com/736x/2a/2c/1d/2a2c1d90075390b22e7e6060254dab0d.jpg')">
       <img src="https://i.pinimg.com/736x/2a/2c/1d/2a2c1d90075390b22e7e6060254dab0d.jpg" alt="SBI"/><span>SBI</span>
@@ -86,7 +108,6 @@
       <img src="https://1000logos.net/wp-content/uploads/2021/06/Bank-of-Baroda-icon.png" alt="Bank of Baroda"/><span>Bank of Baroda</span>
     </div>
   </div>
-
   <div class="section-title">EMI Plans</div>
   <div class="emi-row">
     <label for="emiPlan">Choose EMI Duration:</label>
@@ -99,7 +120,6 @@
     </select>
   </div>
 </div>
-
 <!-- Modal -->
 <div class="modal" id="pay-modal">
   <div class="modal-content" id="modalContent">
@@ -107,55 +127,35 @@
     <div id="modalBody"></div>
   </div>
 </div>
-
 <script>
 let selectedBank = null, selectedBankLogo = null;
-
 function selectBank(bank, logoURL){
   selectedBank = bank;
   selectedBankLogo = logoURL;
   document.querySelectorAll('.bank-card').forEach(el=>el.classList.remove('selected'));
-  let cards = document.querySelectorAll('.bank-card');
-  for(let c of cards){ 
-    if(c.innerText.includes(bank)){ c.classList.add('selected'); break; }
-  }
+  let grid = document.querySelectorAll('.bank-card');
+  for(let c of grid){ if(c.innerText.includes(bank)){c.classList.add('selected');break;} }
 }
-
-function tryPay(msg){
+function tryPay(payMsg){
   if(!selectedBank){
     alert('Payment failed: Please select your bank before proceeding!');
     return false;
   }
   closeModal();
-  alert(msg);
+  alert(payMsg);
   return true;
 }
-
 function openPaymentModal(type){
   let modal = document.getElementById('pay-modal');
   let body = document.getElementById('modalBody');
   let emi = document.getElementById('emiPlan').value;
-
-  let chosenBank = selectedBank 
-    ? `<img src="${selectedBankLogo}" alt="${selectedBank}" class="modal-img" style="max-height:38px;margin-bottom:1em;"> <br/><b>${selectedBank}</b>`
-    : `<span style="color:#b89c3c">No bank selected</span>`;
-
-  let askBank = `
-    <div style="margin-bottom:1.2em">
-      <label>Selected Bank</label>
-      <div>${chosenBank}</div>
-    </div>
-  `;
-
-  let emiDetail = (emi !== "No EMI")
-    ? `<div style="margin-bottom:1em"><label>Selected EMI</label><div><b>${emi}</b></div></div>`
-    : "";
+  let chosenBank = selectedBank ? `<img src="${selectedBankLogo}" alt="${selectedBank}" class="modal-img" style="max-height:38px;margin-bottom:1em;"> <br/><b>${selectedBank}</b>` : `<span style="color:#b89c3c">No bank selected</span>`;
+  let askBank = ` <div style="margin-bottom:1.2em"><label>Selected Bank</label><div>${chosenBank}</div></div>`;
+  let emiDetail = (emi && emi !== "No EMI") ? `<div style="margin-bottom:1em"><label>Selected EMI</label><div><b>${emi}</b></div></div>` : "";
 
   let form = "";
-
   if(type==="phonepe"){
-    form = `
-      <img src="https://www.phonepe.com/webstatic/12359/static/PhonePe_vertical-16158be8710408f3561e1d07d01d5d89.png" class="modal-img"/>
+    form=`<img src="https://www.phonepe.com/webstatic/12359/static/PhonePe_vertical-16158be8710408f3561e1d07d01d5d89.png" class="modal-img"/>
       <div class="modal-title">Pay with PhonePe</div>
       ${askBank}
       ${emiDetail}
@@ -163,10 +163,8 @@ function openPaymentModal(type){
       <input required placeholder="Enter your PhonePe Number or UPI ID"/>
       <button class="submit-btn" onclick="event.preventDefault();tryPay('PhonePe payment initiated');">Pay Now</button>`;
   }
-
   if(type==="paytm"){
-    form = `
-      <img src="https://play-lh.googleusercontent.com/WDGsMRuVENnZPEpV4DEaXw12qtMY3em85xpmZqcXzeh0iT_eXFtAU9VUj-Z7xNQQd5DMqrkKSs9D0qbI1rlt" class="modal-img"/>
+    form=`<img src="https://play-lh.googleusercontent.com/WDGsMRuVENnZPEpV4DEaXw12qtMY3em85xpmZqcXzeh0iT_eXFtAU9VUj-Z7xNQQd5DMqrkKSs9D0qbI1rlt" class="modal-img"/>
       <div class="modal-title">Pay with Paytm</div>
       ${askBank}
       ${emiDetail}
@@ -174,10 +172,8 @@ function openPaymentModal(type){
       <input required placeholder="Enter Paytm linked mobile"/>
       <button class="submit-btn" onclick="event.preventDefault();tryPay('Paytm payment initiated');">Pay Now</button>`;
   }
-
   if(type==="ccdc"){
-    form = `
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Credit-cards.jpg/1200px-Credit-cards.jpg" class="modal-img"/>
+    form=`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Credit-cards.jpg/1200px-Credit-cards.jpg" class="modal-img"/>
       <div class="modal-title">Credit / Debit Card</div>
       ${askBank}
       ${emiDetail}
@@ -192,10 +188,8 @@ function openPaymentModal(type){
       </div>
       <button class="submit-btn" onclick="event.preventDefault();tryPay('Card payment submitted.');">Pay Now</button>`;
   }
-
   if(type==="nb"){
-    form = `
-      <img src="https://payglocal.in/_next/image?url=%2Fblogs%2Fnet-banking-setup-features-benefits%2Fbanner.png&w=3840&q=75" class="modal-img"/>
+    form=`<img src="https://payglocal.in/_next/image?url=%2Fblogs%2Fnet-banking-setup-features-benefits%2Fbanner.png&w=3840&q=75" class="modal-img"/>
       <div class="modal-title">Net Banking / UPI</div>
       ${askBank}
       ${emiDetail}
@@ -203,20 +197,16 @@ function openPaymentModal(type){
       <input type="text" placeholder="Enter UPI or NetBanking ID" required/>
       <button class="submit-btn" onclick="event.preventDefault();tryPay('UPI/NetBanking payment initiated.');">Pay Now</button>`;
   }
-
   body.innerHTML = form;
   modal.style.display = "block";
 }
-
 function closeModal(){
   document.getElementById('pay-modal').style.display="none";
 }
-
 window.onclick = function(event){
   let p = document.getElementById('pay-modal');
-  if(event.target === p){ closeModal(); }
+  if(event.target===p){ closeModal(); }
 };
 </script>
-
 </body>
 </html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Waste2Worth Structure | Flow & Impact</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: url('website_background.png') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f9fafc;
+      color: #185963;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.60);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container, footer {
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 56px auto 0 auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 38px 32px;
+      box-shadow: 0 4px 23px #129a8211;
+    }
+    h1 {
+      color: #15927b;
+      font-size: 2.16rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .structure-intro {
+      text-align: center;
+      font-size: 1.20rem;
+      color: #176e7d;
+      margin-bottom: 33px;
+    }
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .flow-step {
+      background: #eafbf5;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #23dbac16;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 160px;
+      max-width: 210px;
+      padding: 24px 12px 14px 12px;
+      position: relative;
+    }
+    .flow-step img {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 14px;
+    }
+    .flow-step-title {
+      color: #189e95;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    .flow-step-desc {
+      color: #195c4c;
+      font-size: 0.97rem;
+    }
+    .arrow-right {
+      position: absolute;
+      right: -28px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #189e95;
+      font-size: 2.6em;
+    }
+    @media (max-width: 900px) {
+      .flow-row { gap: 11px; }
+    }
+    @media (max-width: 700px) {
+      .container { padding: 18px 7vw; }
+      .flow-row { flex-direction: column; gap: 8px; }
+      .arrow-right { display: none; }
+    }
+    .section-title {
+      font-size: 1.29rem;
+      color: #168c93;
+      font-weight: 700;
+      margin: 40px 0 18px 0;
+    }
+    .platform-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+      margin-bottom: 42px;
+    }
+    .feature-card {
+      background: #f4f6fa;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #129a823a;
+      padding: 20px 12px;
+      text-align: left;
+    }
+    .feature-title {
+      color: #15927b;
+      font-weight: 700;
+      font-size: 1.07rem;
+      margin-bottom: 7px;
+    }
+    .feature-desc {
+      color: #176e7d;
+      font-size: 0.98rem;
+    }
+    .impact-section {
+      background: #eafbf5;
+      border-radius: 14px;
+      padding: 22px 17px;
+      margin-top: 40px;
+    }
+    .impact-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #17bfaa;
+      margin-bottom: 2px;
+    }
+    .impact-list {
+      margin: 0;
+      padding-left: 22px;
+    }
+    .impact-list li {
+      margin-bottom: 9px;
+      color: #145a49;
+      font-size: 1.04rem;
+    }
+    .chart-img {
+      display: block;
+      margin: 36px auto 26px auto;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px #129a8212;
+      max-width: 940px;
+      width: 98vw;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Waste2Worth: Structure & Platform Flow</h1>
+    <div class="structure-intro">
+      Waste2Worth orchestrates the transformation of waste into value.<br>
+      Our flow merges intuition (linear steps) and intelligence (dynamic platform analytics) to unify business, compliance, and impact.
+    </div>
+    <img src="waste2worth_image-1.jpg" alt="Waste2Worth Main Process Chart" class="chart-img" />
+    <div class="section-title">Platform Functioning: Step-by-Step</div>
+    <div class="flow-row">
+      <div class="flow-step">
+        <img src="vs image-4.png" alt="Producer" />
+        <div class="flow-step-title">List Waste</div>
+        <div class="flow-step-desc">Producer submits material types, quantities, and location.</div>
+        <span class="arrow-right">&#8594;</span>
+      </div>
+      <div class="flow-step">
+        <img src="vs image-5.png" alt="Marketplace" />
+        <div class="flow-step-title">Marketplace Visible</div>
+        <div class="flow-step-desc">Buyers filter listings, view details, and consider options.</div>
+        <span class="arrow-right">&#8594;</span>
+      </div>
+      <div class="flow-step">
+        <img src="vs image-6.png" alt="Discovery" />
+        <div class="flow-step-title">Discover & Connect</div>
+        <div class="flow-step-desc">Smart matching connects buyers with suitable producers.</div>
+        <span class="arrow-right">&#8594;</span>
+      </div>
+      <div class="flow-step">
+        <img src="vs image-7.png" alt="Transaction" />
+        <div class="flow-step-title">Transaction & Logistics</div>
+        <div class="flow-step-desc">Logistics, compliance, and payment initiated automatically.</div>
+        <span class="arrow-right">&#8594;</span>
+      </div>
+      <div class="flow-step">
+        <img src="vs image-8.png" alt="Waste Transfer" />
+        <div class="flow-step-title">Waste Transfer</div>
+        <div class="flow-step-desc">Materials shipped & verified; compliance records stored.</div>
+        <span class="arrow-right">&#8594;</span>
+      </div>
+      <div class="flow-step">
+        <img src="vs image-9.png" alt="Impact" />
+        <div class="flow-step-title">Impact Tracked</div>
+        <div class="flow-step-desc">CO₂ saved, tons diverted; impact visualized on dashboards.</div>
+      </div>
+    </div>
+    <div class="section-title">Platform Features</div>
+    <div class="platform-features">
+      <div class="feature-card">
+        <div class="feature-title">Smart Registration & Profiles</div>
+        <div class="feature-desc">Both sellers and buyers create profiles. Smart onboarding and compliance checks enable transparency and trust.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">AI-Powered Discovery & Insights</div>
+        <div class="feature-desc">Our platform uses artificial intelligence for listing recommendations, waste composition prediction, and price analytics.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">End-to-End Transaction Automation</div>
+        <div class="feature-desc">Auction, bidding, contracts, and logistics are handled seamlessly and securely through our integrated tools.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Impact Measurement & Reporting</div>
+        <div class="feature-desc">Users see their positive eco-impact — landfill diversion, CO₂ reduction, and compliance — with real-time tracking.</div>
+      </div>
+    </div>
+    <div class="section-title">Impact in Action</div>
+    <section class="impact-section">
+      <div class="impact-title">Environmental & Economic Impact</div>
+      <ul class="impact-list">
+        <li>Thousands of tons diverted from landfills yearly.</li>
+        <li>Real reductions in carbon footprint across supply chain.</li>
+        <li>Industries save costs and gain new revenue streams.</li>
+        <li>Businesses participate in a dynamic circular economy.</li>
+      </ul>
+    </section>
+    <div class="section-title">Evolved Visuals & Process Flow Examples</div>
+    <img src="vs image -10.png" alt="Waste2Worth Dynamic Platform Flow" class="chart-img" />
+    <img src="vs image - 11.png" alt="Waste2Worth Problem/Solution Flow" class="chart-img" />
+    <img src="vs image - 12.png" alt="Auction-Transaction Step Visuals" class="chart-img" />
+  </main>
+  <footer class="footer" style="background:#eafbf5; border-top:1px solid #bee7e3; text-align:center; font-size:1.07rem; color:#148c93; padding:18px 0; margin-top:40px;">
+    &copy; 2025 Waste2Worth – Structuring a Smarter Future.
+  </footer>
+</body>
+</html>

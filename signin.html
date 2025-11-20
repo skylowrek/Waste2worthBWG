@@ -1,52 +1,78 @@
+<!-- signin.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Sign In - Waste2Worth</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Same card/form CSS as above -->
-  <style>
-    .auth-bg { min-height: 100vh; background: #fafaf6; display: flex; align-items: center; justify-content: center;}
-    .auth-card {background: #fff; border-radius: 24px; box-shadow: 0 7px 32px #15829c17; padding: 36px 28px 38px 28px; max-width: 440px; width: 100%; text-align: center;}
-    .auth-card h1 {font-size: 2.3rem; font-weight: 700; margin-bottom: 36px; color: #194243; letter-spacing: .02em;}
-    .auth-input {width: 100%; margin-bottom: 22px; font-size: 1.17rem; border-radius: 14px; border: 2px solid #e7eae9; padding: 13px 18px; background: #fcfcfa; color: #194243; transition: border 0.16s;}
-    .auth-input:focus {border-color: #15829c; outline: none; background: #f7fafb;}
-    .auth-btn {width: 100%; background: #15829c; color: #fff; font-size: 1.24rem; padding: 14px; border: none; border-radius: 14px; font-weight: 700; margin-top: 12px; margin-bottom: 15px; cursor: pointer; letter-spacing: .02em; box-shadow: 0 2px 8px #15829c22; transition: background 0.15s;}
-    .auth-btn:hover {background: #156c90;}
-    .auth-link {color: #15829c; font-weight: 600; text-decoration: none; transition: color 0.14s;}
-    .auth-link:hover {color: #146a85; text-decoration: underline;}
-    .auth-footer {font-size: 1.1rem; color: #36595c; margin-top: 8px;}
-  </style>
+    <meta charset="UTF-8">
+    <title>Sign In - Waste2Worth</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #194243;
+            background: url('website_background.png') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #fafaf6;
+            position: relative;
+        }
+        /* Overlay for readability */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255,255,255,0.60);
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Content on top of overlay */
+        .auth-bg, .auth-card, h1, form, .auth-footer {
+            position: relative;
+            z-index: 1;
+        }
+        /* Existing Styles */
+        .auth-bg { min-height: 100vh; background: transparent; display: flex; align-items: center; justify-content: center;}
+        .auth-card {background: #fff; border-radius: 24px; box-shadow: 0 7px 32px #15829c17; padding: 36px 28px 38px 28px; max-width: 440px; width: 100%; text-align: center;}
+        .auth-card h1 {font-size: 2.3rem; font-weight: 700; margin-bottom: 36px; color: #194243; letter-spacing: .02em;}
+        .auth-input {width: 100%; margin-bottom: 22px; font-size: 1.17rem; border-radius: 14px; border: 2px solid #e7eae9; padding: 13px 18px; background: #fcfcfa; color: #194243; transition: border 0.16s;}
+        .auth-input:focus {border-color: #15829c; outline: none; background: #f7fafb;}
+        .auth-btn {width: 100%; background: #15829c; color: #fff; font-size: 1.24rem; padding: 14px; border: none; border-radius: 14px; font-weight: 700; margin-top: 12px; margin-bottom: 15px; cursor: pointer; letter-spacing: .02em; box-shadow: 0 2px 8px #15829c22; transition: background 0.15s;}
+        .auth-btn:hover {background: #156c90;}
+        .auth-link {color: #15829c; font-weight: 600; text-decoration: none; transition: color 0.14s;}
+        .auth-link:hover {color: #146a85; text-decoration: underline;}
+        .auth-footer {font-size: 1.1rem; color: #36595c; margin-top: 8px;}
+    </style>
 </head>
 <body>
-  <div class="auth-bg">
-    <div class="auth-card">
-      <h1>Sign In</h1>
-      <form id="signinForm">
-        <input type="email" id="signinEmail" class="auth-input" placeholder="Email Address" required>
-        <input type="password" id="signinPassword" class="auth-input" placeholder="Password" required>
-        <button type="submit" class="auth-btn">Sign In</button>
-      </form>
-      <div class="auth-footer">
-        Don't have an account?
-        <a href="signup.html" class="auth-link">Create Account</a>
-      </div>
+    <div class="auth-bg">
+        <div class="auth-card">
+            <h1>Sign In</h1>
+            <form id="signinForm">
+                <input type="email" id="signinEmail" class="auth-input" placeholder="Email Address" required>
+                <input type="password" id="signinPassword" class="auth-input" placeholder="Password" required>
+                <button type="submit" class="auth-btn">Sign In</button>
+            </form>
+            <div class="auth-footer">
+                Don't have an account?
+                <a href="signup.html" class="auth-link">Create Account</a>
+            </div>
+        </div>
     </div>
-  </div>
-  <script>
-    document.getElementById('signinForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('signinEmail').value;
-      const password = document.getElementById('signinPassword').value;
-      const savedEmail = localStorage.getItem('w2w_user_email');
-      const savedPass = localStorage.getItem('w2w_user_password');
-      if (email === savedEmail && password === savedPass) {
-        alert('Login successful!');
-        window.location.href = "index.html";
-      } else {
-        alert('Invalid email or password.');
-      }
-    });
-  </script>
+    <script>
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            const savedEmail = localStorage.getItem('w2w_user_email');
+            const savedPass = localStorage.getItem('w2w_user_password');
+            if (email === savedEmail && password === savedPass) {
+                alert('Login successful!');
+                window.location.href = "index.html";
+            } else {
+                alert('Invalid email or password.');
+            }
+        });
+    </script>
 </body>
 </html>

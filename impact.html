@@ -3,9 +3,33 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Waste2Worth Impact</title>
+<title>Waste2Worth Impact & Rewards</title>
 <style>
-body { background: #f7fcfa; font-family: 'Segoe UI', Arial, sans-serif; color: #15383c; margin:0; }
+body {
+    background: url('website_background.png') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #f7fcfa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #15383c;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+}
+/* Semi-transparent white overlay for readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(255,255,255,0.60);
+    pointer-events: none;
+    z-index: 0;
+}
+/* Ensure all main content stays above overlay */
+.impact-main, h1, .subtitle, .metrics-row, .running-totals, .infographic-row, .section-title, .map-geo, .leaderboards, .sdg-progress, .impact-quote, .cards-testi {
+    position: relative;
+    z-index: 1;
+}
 .impact-main{max-width:1200px;margin:0 auto;padding:4vw 20px 70px;}
 h1{font-size:2.2rem;color:#23808d;font-weight:900;margin-bottom:8px;}
 .subtitle{color:#35737e;font-size:1.14rem;margin-bottom:30px;}
@@ -13,6 +37,11 @@ h1{font-size:2.2rem;color:#23808d;font-weight:900;margin-bottom:8px;}
 .metric{background:#e6f5ed;border-radius:18px;box-shadow:0 3px 14px #19b97819;flex:1 1 160px;min-width:220px;text-align:center;padding:33px 18px;}
 .metric .val{font-size:2.1rem;font-weight:700;color:#19b978;}
 .metric .lbl{font-size:1.1rem;color:#21717f;}
+/* Custom style for the new Monetization Metric */
+.metric.monetary {background:#fff3e6;box-shadow:0 3px 14px #ffbb0019;}
+.metric.monetary .val {color:#ffbb00;}
+.metric.monetary .lbl {color:#a87a00;}
+
 .running-totals{display:flex;gap:22px;margin-bottom:24px;}
 .rt-box{background:#e9f3fe;border-radius:14px;padding:19px 19px 12px 19px;text-align:center;box-shadow:0 2px 12px #21808d09;flex:1 1 160px;}
 .rt-num{font-size:1.35rem;font-weight:700;color:#1ca043;}
@@ -35,177 +64,207 @@ h1{font-size:2.2rem;color:#23808d;font-weight:900;margin-bottom:8px;}
 .sdg-fill{background:#19b978;height:100%;border-radius:5px;}
 .progress-value{font-size:.96rem;color:#226d56;font-weight:700;margin-bottom:5px;}
 .impact-quote{background:#f9ffdf;border-left:7px solid #ffbb00;padding:20px 18px;margin:23px 0 21px 0;color:#55663a;font-size:1.1rem;font-style:italic;border-radius:14px;}
+/* Custom style for the rewards panel */
+.rewards-panel{background:#e8f8ff;border-left:7px solid #21808d;color:#226080;font-style:normal;}
+.rewards-panel .reward-highlight{font-size:1.4rem;font-weight:800;margin-bottom:8px;color:#23808d;}
+
 .achieve-box{text-align:center;margin:30px 0;}
 .ach-btn{background:#19b978;color:#fff;font-weight:700;border:none;padding:13px 30px;border-radius:10px;font-size:1.06rem;cursor:pointer;margin-top:9px;}
 .cards-testi{display:flex;gap:18px;margin:19px 0 23px 0;}
 .testi{flex:1 1 180px;min-width:185px;background:#fff;box-shadow:0 1px 5px #21808d10;border-radius:11px;padding:16px 14px;font-size:.98rem;}
 .testi .t-user{color:#21808d;font-weight:700;margin-bottom:6px;}
 @media (max-width:900px){
-  .metrics-row,.running-totals,.infographic-row,.leaderboards,.sdg-progress,.cards-testi{flex-direction:column;}
-  .metric,.rt-box,.ig-tile,.lb,.sdg-card,.testi{min-width:unset;}
+    .metrics-row,.running-totals,.infographic-row,.leaderboards,.sdg-progress,.cards-testi{flex-direction:column;}
+    .metric,.rt-box,.ig-tile,.lb,.sdg-card,.testi{min-width:unset;}
 }
 </style>
 </head>
 <body>
 <div class="impact-main">
-  <h1>Platform Environmental Impact</h1>
-  <div class="subtitle">Waste2Worth users, you're making waves! Here’s how your actions transform our planet, community, and industry every day.</div>
-  
-  <!-- Real-time and total impact metrics -->
-  <section class="metrics-row">
-    <div class="metric"><div class="val" id="totalCo2">278,500</div><div class="lbl">kg CO₂ saved</div></div>
-    <div class="metric"><div class="val" id="totalWaste">112,300</div><div class="lbl">kg waste diverted</div></div>
-    <div class="metric"><div class="val" id="totalWater">1,490,000</div><div class="lbl">litres water saved</div></div>
-    <div class="metric"><div class="val" id="totalEnergy">320,000</div><div class="lbl">kWh energy saved</div></div>
-  </section>
+    <h1>Platform Environmental Impact & Rewards</h1>
+    <div class="subtitle">Waste2Worth users, your impact earns you real value! Track your Eco-Credits (EC) and unlock financial rewards.</div>
+    
+    <section class="metrics-row">
+        <div class="metric monetary">
+            <div class="val" id="totalEcoCredits">0</div>
+            <div class="lbl">Eco-Credits (EC) Earned</div>
+        </div>
+        
+        <div class="metric"><div class="val" id="totalCo2">278,500</div><div class="lbl">kg CO₂ saved</div></div>
+        <div class="metric"><div class="val" id="totalWaste">112,300</div><div class="lbl">kg waste diverted</div></div>
+        <div class="metric"><div class="val" id="totalEnergy">320,000</div><div class="lbl">kWh energy saved</div></div>
+    </section>
 
-  <!-- Running impact counters/infographics -->
-  <section class="running-totals">
-    <div class="rt-box">
-      <div class="rt-num" id="rtWaste">112,300</div>
-      <div class="rt-label">Waste diverted (kg)</div>
-    </div>
-    <div class="rt-box">
-      <div class="rt-num" id="rtLandfillEq">284 trucks</div>
-      <div class="rt-label">Landfill prevented</div>
-    </div>
-    <div class="rt-box">
-      <div class="rt-num" id="rtTrees">7,900</div>
-      <div class="rt-label">🌳 Trees saved</div>
-    </div>
-    <div class="rt-box">
-      <div class="rt-num" id="rtOil">13,200</div>
-      <div class="rt-label">🛢 barrels oil saved</div>
-    </div>
-  </section>
+    <section class="running-totals">
+        <div class="rt-box">
+            <div class="rt-num" id="rtWaste">112,300</div>
+            <div class="rt-label">Waste diverted (kg)</div>
+        </div>
+        <div class="rt-box">
+            <div class="rt-num" id="rtLandfillEq">284 trucks</div>
+            <div class="rt-label">Landfill prevented</div>
+        </div>
+        <div class="rt-box">
+            <div class="rt-num" id="rtTrees">7,900</div>
+            <div class="rt-label">🌳 Trees saved</div>
+        </div>
+        <div class="rt-box">
+            <div class="rt-num" id="rtOil">13,200</div>
+            <div class="rt-label">🛢️ barrels oil saved</div>
+        </div>
+    </section>
 
-  <section class="infographic-row">
-    <div class="ig-tile">
-      <div class="ig-icon">🌎</div>
-      <div class="ig-desc">Enough CO₂ saved to offset 295 flights Mumbai–Delhi</div>
-    </div>
-    <div class="ig-tile">
-      <div class="ig-icon">🏊‍♂</div>
-      <div class="ig-desc">Waste diverted would fill 2 Olympic swimming pools</div>
-    </div>
-    <div class="ig-tile">
-      <div class="ig-icon">💡</div>
-      <div class="ig-desc">Energy saved powers 120 homes for a year</div>
-    </div>
-    <div class="ig-tile">
-      <div class="ig-icon">🚰</div>
-      <div class="ig-desc">Water saved equals 20,000+ people’s annual use</div>
-    </div>
-  </section>
+    <div class="section-title">Impact by Geography</div>
+    <div class="map-geo">
+        <img src="https://www.researchgate.net/publication/396561541/figure/fig1/AS:11431281681481786@1760754236043/Map-of-vegetation-cover-of-India_Q320.jpg"
+            style="width:210px;float:right;margin-left:16px;border-radius:9px;" alt="Vegetation Cover of India"/>
 
-  <div class="section-title">Impact by Geography</div>
-  <div class="map-geo">
-    <img src="https://www.researchgate.net/publication/396561541/figure/fig1/AS:11431281681481786@1760754236043/Map-of-vegetation-cover-of-India_Q320.jpg"
-     style="width:210px;float:right;margin-left:16px;border-radius:9px;" alt="Vegetation Cover of India"/>
+        <div>
+            <b>Most Impactful Region:</b> Maharashtra<br/>
+            <b>Waste Diverted:</b> 31,400 kg<br/>
+            <b>CO₂ Saved:</b> 84,200 kg<br/>
+            <b>Next:</b> Karnataka, Telangana, NCR
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    
+    <div class="section-title">Community Leaderboards</div>
+    <div class="leaderboards">
+        <div class="lb">
+            <div class="lb-title">Top Savers (Users)</div>
+            <ul class="lb-list">
+                <li>Raj Patel – 22,000 kg CO₂</li>
+                <li>Sneha Singh – 19,200 kg CO₂</li>
+                <li>GreenCycle Corp – 15,850 kg CO₂</li>
+            </ul>
+        </div>
+        <div class="lb">
+            <div class="lb-title">Waste diverted (Companies)</div>
+            <ul class="lb-list">
+                <li>EcoWaste LLP – 37,900 kg</li>
+                <li>Kumar Metals – 21,800 kg</li>
+                <li>GreenTextiles – 15,400 kg</li>
+            </ul>
+        </div>
+        <div class="lb">
+            <div class="lb-title">Eco Champions (Month)</div>
+            <ul class="lb-list">
+                <li>Ananya (Delhi) – 9,400 kg</li>
+                <li>WasteX Solutions – 8,200 kg</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section-title">💰 Your Financial Rewards Center</div>
+    <div class="impact-quote rewards-panel">
+        <div class="reward-highlight">Current Eco-Credits (EC): <span id="rewardECValue">0</span></div>
+        <p id="discountStatus">Loading your reward status...</p>
+        
+        <div style="margin-top:15px; padding-top:10px; border-top:1px solid #cceeff;">
+            <p style="font-size:1.04rem; font-weight:700; margin-bottom:5px; color:#21808d;">Redeem Your EC:</p>
+            <div style="display:flex; gap:15px;">
+                <button class="ach-btn" style="background:#19b978; padding:8px 18px;" onclick="alert('Subscription Discount Redeemed!')">
+                    Redeem 25% Discount (1,000 EC)
+                </button>
+                <button class="ach-btn" style="background:#ffbb00; padding:8px 18px;" onclick="alert('Annual Subscription Redeemed!')">
+                    Redeem Free Annual Fee (5,000 EC)
+                </button>
+                <button class="ach-btn" style="background:#21808d; padding:8px 18px;" onclick="alert('₹5,000 Voucher Redeemed!')">
+                    Redeem ₹5,000 Voucher (2,500 EC)
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section-title">Sustainability Goals Progress</div>
+    <div class="sdg-progress">
+        <div class="sdg-card">
+            <div class="sdg-label">Plastic Reduced</div>
+            <div class="sdg-bar"><div class="sdg-fill" style="width:62%"></div></div>
+            <div class="progress-value">62% of annual target</div>
+        </div>
+        <div class="sdg-card">
+            <div class="sdg-label">Zero Landfill</div>
+            <div class="sdg-bar"><div class="sdg-fill" style="width:44%"></div></div>
+            <div class="progress-value">44% achieved</div>
+        </div>
+        <div class="sdg-card">
+            <div class="sdg-label">Energy Saved</div>
+            <div class="sdg-bar"><div class="sdg-fill" style="width:78%"></div></div>
+            <div class="progress-value">78% of goal</div>
+        </div>
+    </div>
 
-    <div>
-      <b>Most Impactful Region:</b> Maharashtra<br/>
-      <b>Waste Diverted:</b> 31,400 kg<br/>
-      <b>CO₂ Saved:</b> 84,200 kg<br/>
-      <b>Next:</b> Karnataka, Telangana, NCR
+    <div class="section-title">AI-Powered Environmental Insights</div>
+    <div class="impact-quote">
+        "Your actions last month helped lower Delhi’s landfill methane emissions by 0.2%—that’s the same as planting 900 trees! If all users matched your pace, India could avoid 1.4M kg of emissions this year."
+        <br/><br/><span style="font-size:.96rem;color:#21808d;"><b>– Gemini AI Impact Insight</b></span>
     </div>
-    <div style="clear:both;"></div>
-  </div>
 
-  <div class="section-title">Community Leaderboards</div>
-  <div class="leaderboards">
-    <div class="lb">
-      <div class="lb-title">Top Savers (Users)</div>
-      <ul class="lb-list">
-        <li>Raj Patel – 22,000 kg CO₂</li>
-        <li>Sneha Singh – 19,200 kg CO₂</li>
-        <li>GreenCycle Corp – 15,850 kg CO₂</li>
-      </ul>
+    <div class="section-title">Waste2Worth Success Stories</div>
+    <div class="cards-testi">
+        <div class="testi">
+            <div class="t-user">Sneha S, Producer</div>
+            <em>“We diverted 12 tons from landfill with W2W last quarter, getting a price boost for eco-compliance. Our green badge really increased buyer trust!”</em>
+        </div>
+        <div class="testi">
+            <div class="t-user">EcoWaste LLP</div>
+            <em>“Nice dashboard and clear impact reporting. Showed our partners our regional leader badge and brought 2 new clients!”</em>
+        </div>
+        <div class="testi">
+            <div class="t-user">Ananya, Buyer</div>
+            <em>“The monthly progress and Gemini-powered tips make it fun to track my contribution. Sharing my CO₂ badge scored real points with the team, too!”</em>
+        </div>
     </div>
-    <div class="lb">
-      <div class="lb-title">Waste diverted (Companies)</div>
-      <ul class="lb-list">
-        <li>EcoWaste LLP – 37,900 kg</li>
-        <li>Kumar Metals – 21,800 kg</li>
-        <li>GreenTextiles – 15,400 kg</li>
-      </ul>
-    </div>
-    <div class="lb">
-      <div class="lb-title">Eco Champions (Month)</div>
-      <ul class="lb-list">
-        <li>Ananya (Delhi) – 9,400 kg</li>
-        <li>WasteX Solutions – 8,200 kg</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-title">Monthly and Annual Progress</div>
-  <div class="infographic-row">
-    <div class="ig-tile"><b>Nov 2025</b><br/>18,200 kg CO₂ saved<br/><span style="color:#19b978;">▲ +9% over Oct</span></div>
-    <div class="ig-tile"><b>Year-to-date</b><br/>278,500 kg CO₂<br/>112,300 kg waste</div>
-    <div class="ig-tile"><b>SDG Target (2030)</b><br/>1 million kg CO₂<br><span style="color:#cd9532;">Progress: 28%</span></div>
-  </div>
-
-  <div class="section-title">Sustainability Goals Progress</div>
-  <div class="sdg-progress">
-    <div class="sdg-card">
-      <div class="sdg-label">Plastic Reduced</div>
-      <div class="sdg-bar"><div class="sdg-fill" style="width:62%"></div></div>
-      <div class="progress-value">62% of annual target</div>
-    </div>
-    <div class="sdg-card">
-      <div class="sdg-label">Zero Landfill</div>
-      <div class="sdg-bar"><div class="sdg-fill" style="width:44%"></div></div>
-      <div class="progress-value">44% achieved</div>
-    </div>
-    <div class="sdg-card">
-      <div class="sdg-label">Energy Saved</div>
-      <div class="sdg-bar"><div class="sdg-fill" style="width:78%"></div></div>
-      <div class="progress-value">78% of goal</div>
-    </div>
-  </div>
-
-  <div class="section-title">AI-Powered Environmental Insights</div>
-  <div class="impact-quote">
-    "Your actions last month helped lower Delhi’s landfill methane emissions by 0.2%—that’s the same as planting 900 trees! If all users matched your pace, India could avoid 1.4M kg of emissions this year."
-    <br/><br/><span style="font-size:.96rem;color:#21808d;"><b>– Gemini AI Impact Insight</b></span>
-  </div>
-
-  <div class="section-title">Share Your Climate Achievement</div>
-  <div class="achieve-box">
-    <div><b>You saved 9,400 kg CO₂. Download your badge or share your story!</b></div>
-    <button class="ach-btn" onclick="alert('Impact badge downloaded!')">Download Badge</button>
-    <button class="ach-btn" style="background:#21808d;margin-left:12px;" onclick="alert('Shared on LinkedIn!')">Share to LinkedIn</button>
-  </div>
-
-  <div class="section-title">Waste2Worth Success Stories</div>
-  <div class="cards-testi">
-    <div class="testi">
-      <div class="t-user">Sneha S, Producer</div>
-      <em>“We diverted 12 tons from landfill with W2W last quarter, getting a price boost for eco-compliance. Our green badge really increased buyer trust!”</em>
-    </div>
-    <div class="testi">
-      <div class="t-user">EcoWaste LLP</div>
-      <em>“Nice dashboard and clear impact reporting. Showed our partners our regional leader badge and brought 2 new clients!”</em>
-    </div>
-    <div class="testi">
-      <div class="t-user">Ananya, Buyer</div>
-      <em>“The monthly progress and Gemini-powered tips make it fun to track my contribution. Sharing my CO₂ badge scored real points with the team, too!”</em>
-    </div>
-  </div>
 </div>
 <script>
-// Animated running counter for waste diverted (demo)
+// --- CORE HACKATHON MONETIZATION LOGIC (FRONTEND MOCK) ---
+
+// 1. Define the input metric (based on your existing static data)
+const wasteDivertedKg = 112300; 
+
+// 2. Define the Business Model Conversion Rate (This is your HACKATHON PITCH answer!)
+// Formula: 1 Eco-Credit is earned for every 50 kg of waste diverted.
+const EC_PER_KG = 1 / 50; 
+const REDEEM_DISCOUNT_EC = 1000;
+const REDEEM_FREE_YEAR_EC = 5000;
+
+function updateMonetizationMetrics() {
+    // A. Calculate Total Eco-Credits earned
+    let totalEC = Math.floor(wasteDivertedKg * EC_PER_KG); 
+    document.getElementById('totalEcoCredits').textContent = totalEC.toLocaleString();
+    document.getElementById('rewardECValue').textContent = totalEC.toLocaleString();
+
+    // B. Determine Discount Status (Incentive Logic)
+    const discountStatusEl = document.getElementById('discountStatus');
+    
+    if (totalEC >= REDEEM_FREE_YEAR_EC) {
+        discountStatusEl.innerHTML = `🔥 **FULL REWARD UNLOCKED!** You have enough credits for a **FREE ANNUAL SUBSCRIPTION**! Redeem now to save ₹12,000.`;
+    } else if (totalEC >= REDEEM_DISCOUNT_EC) {
+        // Calculate the value of the 25% discount based on an assumed monthly fee of ₹2,500
+        const savedAmount = (2500 * 0.25).toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+        discountStatusEl.innerHTML = `✅ **25% FEE DISCOUNT UNLOCKED!** Redeem 1,000 EC to save ${savedAmount} on your next platform fee. You are **${REDEEM_FREE_YEAR_EC - totalEC} EC** away from a free year.`;
+    } else {
+        const remainingForDiscount = REDEEM_DISCOUNT_EC - totalEC;
+        discountStatusEl.innerHTML = `Keep going! Divert **${remainingForDiscount * 50} kg** more waste to unlock your first **25% Fee Discount**!`;
+    }
+}
+
+// Existing animation code (modified to run all updates)
 let waste = 98000, wasteMax = 112300;
 function runWasteCounter() {
-  if (waste < wasteMax) {
-    waste += Math.ceil((wasteMax-waste)/33); // Easing
-    if (waste > wasteMax) waste = wasteMax;
-    document.getElementById('rtWaste').textContent = waste.toLocaleString();
-    setTimeout(runWasteCounter, 40);
-  }
+    if (waste < wasteMax) {
+        waste += Math.ceil((wasteMax-waste)/33); // Easing
+        if (waste > wasteMax) waste = wasteMax;
+        document.getElementById('rtWaste').textContent = waste.toLocaleString();
+        setTimeout(runWasteCounter, 40);
+    }
 }
-document.addEventListener("DOMContentLoaded", runWasteCounter);
+
+document.addEventListener("DOMContentLoaded", () => {
+    runWasteCounter(); // Start animation
+    updateMonetizationMetrics(); // Calculate and display EC and rewards
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us | Waste2Worth</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #15323b;
+      background: url('website_background.png') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f7f9fa;
+      position: relative;
+      min-height: 100vh;
+    }
+    /* Overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.60);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Layer all main page content above overlay */
+    .about-header,
+    .about-main-content,
+    .values-section,
+    .team-section,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Keep your existing styles unchanged below */
+    .about-header {
+      background: linear-gradient(120deg, #23bdb8 55%, #f9fafc 100%);
+      padding: 64px 0 42px 0;
+      text-align: center;
+      position: relative;
+    }
+    .about-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #14444c;
+      margin-bottom: 14px;
+      letter-spacing: -.02em;
+    }
+    .about-header p {
+      font-size: 1.32rem;
+      color: #267785;
+      line-height: 1.4;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    .about-images-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      margin: 54px auto 42px auto;
+      max-width: 1200px;
+    }
+    .about-image-card {
+  box-shadow: 0 8px 32px 0 rgba(33,128,141,0.16), 0 2px 8px #23bdb88c;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.97);
+  border: 3px solid #19b978;
+  transition: box-shadow 0.22s, border-color 0.22s, transform 0.17s;
+  overflow: hidden;
+  width: 320px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 16px;
+}
+.about-image-card:hover {
+  box-shadow: 0 14px 42px 0 rgba(25,185,120,0.19), 0 6px 18px #198e7899;
+  border-color: #15829c;
+  transform: translateY(-4px) scale(1.04);
+}
+.about-image-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-bottom: 3px solid #e2f8f4;
+  background: #e5f5f7;
+  filter: none;
+}
+.about-image-card .img-caption {
+  color: #21808d;
+  font-size: 1.07rem;
+  margin-top: 15px;
+  font-weight: 700;
+  text-align: center;
+  padding: 0 14px;
+  letter-spacing: .01em;
+}
+
+    .about-main-content {
+      max-width: 970px;
+      margin: 0 auto 44px auto;
+      background: #fff;
+      padding: 44px 32px;
+      border-radius: 22px;
+      box-shadow: 0 6px 32px #17bfaab2;
+    }
+    .about-main-content h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -.018em;
+      margin-bottom: 22px;
+      color: #15927b;
+    }
+    .about-main-content p {
+      font-size: 1.17rem;
+      line-height: 1.7;
+      color: #154a4d;
+      margin-bottom: 26px;
+      font-weight: 480;
+    }
+    .about-main-content ul {
+      margin-left: 0;
+      padding-left: 18px;
+      margin-bottom: 28px;
+    }
+    .about-main-content li {
+      font-size: 1.07rem;
+      margin-bottom: 10px;
+      color: #186c5c;
+    }
+    .values-section {
+      background: linear-gradient(100deg, #eafbf5 70%, #ccf0ea 100%);
+      border-radius: 22px;
+      max-width: 1050px;
+      margin: 54px auto 56px auto;
+      box-shadow: 0 6px 30px #10b19118;
+      padding: 36px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 42px;
+      justify-content: center;
+    }
+    .value-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 20px;
+      width: 220px;
+      box-shadow: 0 2px 14px #129a8222;
+      text-align: center;
+    }
+    .value-icon {
+      background: #149a93;
+      color: #fff;
+      border-radius: 50%;
+      padding: 18px;
+      font-size: 2.2em;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 15px #23bdb850;
+    }
+    .value-title {
+      font-weight: 700;
+      color: #15aa79;
+      font-size: 1.16rem;
+      margin-bottom: 8px;
+    }
+    .value-desc {
+      color: #185963;
+      font-size: 1.01rem;
+    }
+    .team-section {
+      margin: 54px auto 44px auto;
+      max-width: 880px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 5px 24px #10bb7013;
+      padding: 32px 22px;
+    }
+    .team-section h2 { color: #189e95; margin-bottom: 19px; font-size: 1.7rem; }
+    .team-profiles { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; }
+    .team-card {
+      background: #f5fef8;
+      border-radius: 14px;
+      box-shadow: 0 2px 11px #23dbac20;
+      padding: 20px 18px;
+      text-align: center;
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .team-card img {
+      border-radius: 50%;
+      width: 66px;
+      height: 66px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      background: #e4f7f6;
+      box-shadow: 0 2px 11px #23dbac20;
+    }
+    .team-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #167a5a;
+      margin-bottom: 5px;
+    }
+    .team-role {
+      color: #189e95;
+      font-size: 0.98rem;
+      margin-bottom: 7px;
+    }
+    .team-contact a {
+      color: #1a826d;
+      font-size: 0.98rem;
+      text-decoration: none;
+    }
+    @media (max-width:880px){
+      .about-main-content, .team-section { padding: 20px 6vw; }
+      .about-images-row, .values-section { gap:16px; }
+    }
+    @media (max-width:650px){
+      .about-images-row, .team-profiles, .values-section{ flex-direction:column; align-items:center;}
+      .about-image-card, .value-card, .team-card{ width:98vw; }
+      .about-header{ padding:40px 6vw 18px 6vw;}
+    }
+  </style>
+</head>
+<body>
+  <div class="about-header">
+    <h1>About Waste2Worth</h1>
+    <p>Let us revolutionize waste management with portable, AI-driven technology&nbsp;—&nbsp;a future that adapts, learns, and moves with you.</p>
+  </div>
+
+  <div class="about-images-row">
+    <div class="about-image-card">
+      <img src="https://discoveryalert.com.au/wp-content/uploads/2025/11/493cae20-93f8-40b7-b666-e13d8110423a-1024x572.jpg" alt="AI Innovation">
+      <div class="img-caption">Next-Gen AI Sorting Lab</div>
+    </div>
+    <div class="about-image-card">
+      <img src="https://thumbs.dreamstime.com/b/green-septic-tank-wheels-ready-sewage-waste-disposal-portable-sewage-container-cleaning-industrial-sanitation-385673736.jpg" alt="Portable Waste Unit">
+      <div class="img-caption">Portable Waste Management Unit</div>
+    </div>
+    <div class="about-image-card">
+      <img src="https://ars.els-cdn.com/content/image/1-s2.0-S0959652622039452-ga1.jpg" alt="Global Impact">
+      <div class="img-caption">Global Waste Network</div>
+    </div>
+  </div>
+
+  <section class="about-main-content">
+    <h2>Introduction</h2>
+    <p>
+      Waste2Worth pioneers a new era in waste management, fusing artificial intelligence, portability, and real-time data to turn trash into lasting value.<br>
+      Our story began with a simple goal: make circular economy accessible, adaptive, and impactful for everyone.<br>
+      Today, our platform empowers producers and buyers to manage their waste streams anywhere — not just in static plants, but with mobile units and smart sensors powered by predictive AI.
+    </p>
+    <p>
+      <strong>We believe:</strong>
+    </p>
+    <ul>
+      <li>Waste is not a limitation, but a resource ready to be unlocked with the right technology.</li>
+      <li>AI can elevate recycling — learning, adapting, and optimizing material flow for greater impact.</li>
+      <li>Portability enables waste solutions everywhere: from factories to farms, cities to villages, making sustainability reach all corners.</li>
+      <li>The future of waste management is not static. It evolves as quickly as the world around us.</li>
+      <li>Environmental impact is more than numbers. We visualize and celebrate every ton diverted, every kilogram of CO₂ saved, every local transformation.</li>
+    </ul>
+    <p>
+      Waste2Worth is not just a marketplace. It's a movement to democratize green innovation, driven by AI, IoT, and an ethos of shared progress for industries and communities alike.
+    </p>
+  </section>
+
+  <section class="values-section">
+    <div class="value-card">
+      <div class="value-icon">🌎</div>
+      <div class="value-title">Sustainable Vision</div>
+      <div class="value-desc">Building a circular economy through smart, scalable processes.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤖</div>
+      <div class="value-title">AI Intelligence</div>
+      <div class="value-desc">Deploying predictive algorithms to optimize every waste flow.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🚚</div>
+      <div class="value-title">Ultimate Portability</div>
+      <div class="value-desc">Portable waste tech: decentralized, flexible, adaptable anywhere.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🧑‍🤝‍🧑</div>
+      <div class="value-title">Community Impact</div>
+      <div class="value-desc">Empowering people, businesses, and local leadership on their sustainability journey.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌐</div>
+      <div class="value-title">Global Connectivity</div>
+      <div class="value-desc">Uniting supply chains, buyers and sellers for greater collective action.</div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-profiles">
+      <div class="team-card">
+        <img src="ashu_photo1.jpeg" alt="Aditya" />
+        <div class="team-name">Aditya Ranjan</div>
+        <div class="team-role">Lead Developer & Architect</div>
+        <div class="team-contact"><a href="tel:+919899047733">+91 98990 47733</a></div>
+      </div>
+      <div class="team-card">
+        <img src="image_3.jpeg" alt="Mannan" />
+        <div class="team-name">Mannan Sachdeva</div>
+        <div class="team-role">Backend Integration Specialist</div>
+        <div class="team-contact"><a href="tel:+919820858950">+91 98208 58950</a></div>
+      </div>
+      <div class="team-card">
+        <img src="image_5.jpeg" alt="Vikas" />
+        <div class="team-name">Vikas Kumar Jha</div>
+        <div class="team-role">Frontend & UI/UX Designer</div>
+        <div class="team-contact"><a href="tel:+918700873760">+91 87008 73760</a></div>
+      </div>
+      <div class="team-card">
+        <img src="image_2.jpeg" alt="Shubham" />
+        <div class="team-name">Shubham Bansal</div>
+        <div class="team-role">Quality Assurance Lead</div>
+        <div class="team-contact"><a href="tel:+919711658895">+91 97116 58895</a></div>
+      </div>
+      <div class="team-card">
+        <img src="image_1.jpeg" alt="Aabhas" />
+        <div class="team-name">Aabhas Saxena</div>
+        <div class="team-role">Analytics & Reporting Specialist</div>
+        <div class="team-contact"><a href="tel:+919811456321">+91 98114 56321</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" style="background:#f8fcfc; border-top:1px solid #e4eae7; text-align:center; font-size:1.07rem; color:#158c76; padding:28px 0;">
+    &copy; 2025 Waste2Worth Transforming Waste, Empowering Communities.
+  </footer>
+</body>
+</html>

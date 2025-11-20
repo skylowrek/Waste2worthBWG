@@ -5,7 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Waste Scanner | Waste2Worth</title>
 <style>
-body { margin:0;background:#f6f9fa;font-family:'Segoe UI',Arial,sans-serif;color:#164044;}
+body {
+  margin: 0;
+  background: url('website_background.png') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #f6f9fa;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#164044;
+  min-height: 100vh;
+  position: relative;
+}
+/* Overlay for text/image readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.60);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Prevent overlay from blocking main content */
+.scanner-main, h1, .subtitle, .scan-view, .scan-action-btns, #resultBlock {
+  position: relative;
+  z-index: 1;
+}
 .scanner-main { max-width:430px;margin:3vw auto 0 auto; background: #fff; border-radius:22px; box-shadow:0 4px 24px #21808d1c; padding:34px 28px 30px;}
 h1 { color:#21808d; font-weight:900; text-align:center; font-size:2.1rem;}
 .subtitle { color:#466973; text-align:center; margin-bottom:22px;}
@@ -68,7 +92,6 @@ function startCamera() {
   img.style.display = "";
   document.getElementById('resultBlock').style.display = "";
 }
-
 // File upload shows preview and result
 function uploadImage(event) {
   let file = event.target.files && event.target.files[0];

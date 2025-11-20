@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Waste Dealing | Waste2Worth</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: url('website_background.png') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f5f9fb;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #154a4d;
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(255,255,255,0.60);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .waste-hero, .chain-section, .features-section, .deals-section, footer {
+      position: relative;
+      z-index: 1;
+    }
+    .waste-hero {
+      background: linear-gradient(120deg, #45CED6 50%, #f5f9fb 100%);
+      padding: 54px 0 46px 0;
+      text-align: center;
+      position: relative;
+    }
+    .waste-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #148c93;
+      margin-bottom: 12px;
+    }
+    .waste-hero p {
+      font-size: 1.24rem;
+      color: #176e7d;
+      font-weight: 540;
+      line-height: 1.35;
+    }
+    .dealing-icons-row {
+      display: flex;
+      gap: 46px;
+      justify-content: center;
+      margin: 40px auto 24px auto;
+      flex-wrap: wrap;
+      max-width: 1100px;
+    }
+    .dealing-icon-card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(33,128,141,0.13), 0 2px 8px #23bdb88c;
+      border: 3px solid #19b978;
+      width: 150px;
+      padding: 24px 10px 18px 10px;
+      text-align: center;
+      margin-bottom: 18px;
+      transition: box-shadow 0.16s, border-color 0.18s, transform 0.14s;
+    }
+    .dealing-icon-card:hover {
+      box-shadow: 0 14px 42px 0 rgba(25,185,120,0.19), 0 8px 20px #21808d30;
+      border-color: #15829c;
+      transform: translateY(-4px) scale(1.05);
+    }
+    .dealing-icon-card img {
+      height: 64px; width: auto; margin-bottom: 14px; border-radius: 10px;
+      box-shadow: 0 1.5px 8px #23bdb822;
+      border: 2px solid #e2f8f4;
+      background: #eafbf5;
+    }
+    .dealing-icon-card .icon-label {
+      font-size: 1.07rem;
+      font-weight: 700;
+      color: #21808d;
+      letter-spacing: .02em;
+      margin-top: 7px;
+    }
+    .chain-section {
+      background: #ecf7f6;
+      border-radius: 21px;
+      box-shadow: 0 6px 32px #17bfaab2;
+      padding: 48px 30px;
+      max-width: 1100px;
+      margin: 54px auto 46px auto;
+      text-align: center;
+    }
+    .chain-section h2 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #145a49;
+      margin-bottom: 18px;
+    }
+    .chain-section p {
+      font-size: 1.11rem;
+      color: #186c5c;
+      margin-bottom: 28px;
+    }
+    .supply-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+    .supply-table th, .supply-table td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid #d4efe6;
+      font-size: 1.01rem;
+    }
+    .supply-table th {
+      background: #e5f7f7;
+      color: #149a93;
+      font-weight: 750;
+    }
+    .supply-table td img {
+      width: 70px; height: 48px; object-fit: cover;
+      border-radius: 9px; box-shadow: 0 2px 11px #23dbac20;
+    }
+    .features-section {
+      background: linear-gradient(110deg, #f4f6fa 60%, #eafbf5 100%);
+      border-radius: 20px;
+      box-shadow: 0 6px 23px #10b19118;
+      padding: 38px 26px;
+      max-width: 1150px;
+      margin: 52px auto 34px auto;
+    }
+    .features-section h2 { font-size: 1.54rem; color: #148c93; font-weight: 700; margin-bottom: 28px; text-align: center;}
+    .features-grid { display: flex; gap: 38px; flex-wrap: wrap; justify-content: center;}
+    .feature-card {
+      background: #fff; border-radius: 13px; box-shadow: 0 2px 11px #23dbac15;
+      width: 220px;
+      padding: 22px 15px 16px 15px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .feature-card img { width: 54px; height: 54px; object-fit: cover; margin-bottom: 11px; }
+    .feature-title { color: #1b7fad; font-size: 1.09rem; font-weight: 700; margin-bottom: 7px;}
+    .feature-desc { color: #187c66; font-size: 1.01rem;}
+    .deals-section {
+      margin: 60px auto 50px auto; max-width: 1200px; text-align: center;
+    }
+    .deals-section h2 { color: #1b7fad; font-size: 1.22rem; font-weight: 700; margin-bottom: 19px; }
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-top: 23px;
+    }
+    .deal-card {
+      background: #fff; border-radius: 15px; box-shadow: 0 2px 14px #179b6a13;
+      padding: 24px 18px;
+      text-align: left;
+      position: relative;
+    }
+    .deal-card img { width: 92px; height: 56px; object-fit: cover; border-radius: 9px; position: absolute; right:18px; top:18px; }
+    .deal-title { font-size: 1.07rem; font-weight: 700; color: #176e7d; margin-bottom: 7px; }
+    .deal-meta { font-size: 0.99rem; color: #189e95; margin-bottom: 11px;}
+    .deal-desc { font-size: 0.97rem; color: #145a49;}
+    @media (max-width:800px){
+      .supply-table th, .supply-table td{ font-size:0.95rem; }
+      .features-grid{ flex-direction:column; align-items:center;}
+    }
+    @media (max-width:650px){
+      .dealing-icons-row{ flex-direction:column; gap:14px;}
+      .chain-section, .features-section{padding:18px 3vw;}
+      .deals-grid{ grid-template-columns:1fr;}
+      .deal-card img{ width:68px; height:38px;}
+    }
+  </style>
+</head>
+<body>
+  <section class="waste-hero">
+    <h1>Waste2Worth Marketplace</h1>
+    <p>
+      Where technology, trust and real-time data bring buyers and sellers together.<br>
+      Deal with PE, PET, metals, paper, e-waste, organics, textiles, and more—streamlined, secure, and smarter than ever.
+    </p>
+    <div class="dealing-icons-row">
+      <div class="dealing-icon-card">
+        <img src="https://media.istockphoto.com/id/187068991/photo/dirty-plastic-bottles.jpg?s=612x612&w=0&k=20&c=dF25qF5YO4IxQ_hSYiYN8FQsNiqHm3a77pWCsYhGdow=" alt="PET Bottle">
+        <div class="icon-label">PET Bottles</div>
+      </div>
+      <div class="dealing-icon-card">
+        <img src="https://media.gettyimages.com/id/1298441934/photo/black-frying-pans-with-a-non-stick-teflon-coating-on-black-background.jpg?s=612x612&w=0&k=20&c=zInAjy_WtL5Zbiyq5j18cQ3EJYat-5PMMoXpiHiEww8=" alt="Non PET">
+        <div class="icon-label">Non-PET Plastics</div>
+      </div>
+      <div class="dealing-icon-card">
+        <img src="https://t3.ftcdn.net/jpg/00/38/23/88/360_F_38238869_uTIKsMWGQkvMv4JHNIHJASlB71qEx1zi.jpg" alt="Paper Waste">
+        <div class="icon-label">Waste Paper</div>
+      </div>
+      <div class="dealing-icon-card">
+        <img src="https://media.istockphoto.com/id/531543158/photo/stainless-steel-scrap.jpg?s=612x612&w=0&k=20&c=kFPmE8O_rnpg6egLFEjly3tfvE7-kq4ZtCaqV3mJgI8=" alt="Metal Waste">
+        <div class="icon-label">Metal Waste</div>
+      </div>
+      <div class="dealing-icon-card">
+        <img src="https://media.istockphoto.com/id/185234332/photo/electronics-recycling.jpg?s=612x612&w=0&k=20&c=KJ7tsHt8r9Dx3zRc6y3XJo2e0ymF7z0JC4jPzNK499E=" alt="E-Waste">
+        <div class="icon-label">E-Waste</div>
+      </div>
+      <div class="dealing-icon-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHKeLXIXTnQYWg5nj-0ad7WOW0k_sDa3IfeA&s" alt="Textile Waste">
+        <div class="icon-label">Textile & Organics</div>
+      </div>
+      <div class="dealing-icon-card">
+        <img src="https://axil-is.com/wp-content/uploads/2022/08/Zero-Waste-Landfill-Image-2.jpeg" alt="Other Waste">
+        <div class="icon-label">Zero Landfill</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chain-section">
+    <h2>Waste Supply Chain — Smart, Transparent, Organized</h2>
+    <p>
+      Our AI-driven platform organizes the unorganized waste sector, creating robust supply chains for recyclables, industrial scraps, urban materials, and more.<br>
+      Connect with trusted sellers and buyers, access real-time analytics, and automate your compliance—all on Waste2Worth!
+    </p>
+    <table class="supply-table">
+      <thead>
+        <tr>
+          <th>Material Type</th>
+          <th>Location</th>
+          <th>Quantity</th>
+          <th>Seller</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>LDPE - LDPE Jazz</td>
+          <td>United Kingdom</td>
+          <td>100 MT</td>
+          <td>Eco Global Ltd.</td>
+          <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsGZoJXbLWaZE0sDLcuzDEe--EZP2RjPFczg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsGZoJXbLWaZE0sDLcuzDEe--EZP2RjPFczg&s" alt="LDPE"></td>
+        </tr>
+        <tr>
+          <td>PP - PP Inj Regrind</td>
+          <td>Bulgaria</td>
+          <td>40 MT</td>
+          <td>PlastoChain Ltd.</td>
+          <td><img src="https://www.wastetrade.com/wp-content/uploads/2025/01/Plastic-PP-PP_PE-Regrind-12180-2-768x1024.jpg?v=1736622107" alt="PP Regrind"></td>
+        </tr>
+        <tr>
+          <td>HDPE - Crate Regrind</td>
+          <td>India</td>
+          <td>80 MT</td>
+          <td>GreenBox Pvt.</td>
+          <td><img src="https://images.mywastesolution.com/mwsb2b/company/228/buyproduct/157/hdpe-scrap471/PEkcmpyjP1VhgYZNjVjPxgHtmLyxd29DKSF061rs.webp" alt="HDPE"></td>
+        </tr>
+        <tr>
+          <td>E-Waste — Processed Assets</td>
+          <td>Germany</td>
+          <td>21 MT</td>
+          <td>SmartWires GmbH</td>
+          <td><img src="https://eu-images.contentstack.com/v3/assets/blt8eb3cdfc1fce5194/blt2e8843dc28040907/66508e36ffe6c82c89c55037/e-waste.jpg?width=1280&auto=webp&quality=80&format=jpg&disable=upscale" alt="E-Waste"></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="features-section">
+    <h2>What Sets Waste2Worth Apart</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <img src="https://as1.ftcdn.net/jpg/05/80/56/66/1000_F_580566601_EOKsY2Hs7m8zkms9wZsNOgyN4igbIAzX.jpg" alt="Digital Interface">
+        <div class="feature-title">Digital Interface</div>
+        <div class="feature-desc">Snapshot listings, contracts, and data between verified buyers and sellers.</div>
+      </div>
+      <div class="feature-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyE1t26ql7Sl2UDZtK7tsDM2VGk2OZgdlXVg&s" alt="360 Management">
+        <div class="feature-title">360° Management</div>
+        <div class="feature-desc">Auctions, contracts, invoicing, logistics—the full waste deal lifecycle automated.</div>
+      </div>
+      <div class="feature-card">
+        <img src="https://online.hbs.edu/Style%20Library/api/resize.aspx?imgpath=/online/PublishingImages/blog/posts/business-professional-examining-data-analytics.jpg&w=1200&h=630" alt="Data Analytics">
+        <div class="feature-title">Data Analytics</div>
+        <div class="feature-desc">AI insights on deal trends, compliance, and market pricing in real time.</div>
+      </div>
+      <div class="feature-card">
+        <img src="https://st4.depositphotos.com/1005979/23726/i/450/depositphotos_237267714-stock-photo-transparency-words-arrows-illustration.jpg" alt="Transparency">
+        <div class="feature-title">Transparency & Clarity</div>
+        <div class="feature-desc">All operations are visible, traceable, and guaranteed by smart contracts.</div>
+      </div>
+      <div class="feature-card">
+        <img src="https://thumbs.dreamstime.com/b/profit-focused-icons-business-strategy-dedicated-to-enhancement-357524285.jpg" alt="Profit Enhancement">
+        <div class="feature-title">Profit Enhancement</div>
+        <div class="feature-desc">Increase revenue for both buyers and sellers with optimized deal making.</div>
+      </div>
+      <div class="feature-card">
+        <img src="https://www.solutions360.com/wp-content/uploads/2022/08/Operational-Efficiency-600-x-438.png" alt="Efficient Operations">
+        <div class="feature-title">Efficient Operations</div>
+        <div class="feature-desc">Automate and streamline every step, reduce delays, reduce costs.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="deals-section">
+    <h2>Featured Marketplace Deals</h2>
+    <div class="deals-grid">
+      <div class="deal-card">
+        <img src="https://media.istockphoto.com/id/187068991/photo/dirty-plastic-bottles.jpg?s=612x612&w=0&k=20&c=dF25qF5YO4IxQ_hSYiYN8FQsNiqHm3a77pWCsYhGdow=" alt="PET Deal">
+        <div class="deal-title">PET Bottles Bulk Offer</div>
+        <div class="deal-meta">India · 250MT · Seller: AquaRecycle Ltd.</div>
+        <div class="deal-desc">Doorstep delivery, direct payment, AI waste traceability.</div>
+      </div>
+      <div class="deal-card">
+        <img src="https://media.istockphoto.com/id/531543158/photo/stainless-steel-scrap.jpg?s=612x612&w=0&k=20&c=kFPmE8O_rnpg6egLFEjly3tfvE7-kq4ZtCaqV3mJgI8=" alt="Metal Deal">
+        <div class="deal-title">Metal Scrap — Recycled Sheets</div>
+        <div class="deal-meta">Singapore · 110MT · Seller: MetalLoop Inc.</div>
+        <div class="deal-desc">Verified asset quality, data-driven reporting, instant booking.</div>
+      </div>
+      <div class="deal-card">
+        <img src="https://media.istockphoto.com/id/185234332/photo/electronics-recycling.jpg?s=612x612&w=0&k=20&c=KJ7tsHt8r9Dx3zRc6y3XJo2e0ymF7z0JC4jPzNK499E=" alt="E-Waste Deal">
+        <div class="deal-title">E-Waste Assets</div>
+        <div class="deal-meta">Germany · 60MT · Seller: E-Cycle Global</div>
+        <div class="deal-desc">High-quality electronics, secure logistics, compliance paperwork included.</div>
+      </div>
+      <div class="deal-card">
+        <img src="https://t3.ftcdn.net/jpg/00/38/23/88/360_F_38238869_uTIKsMWGQkvMv4JHNIHJASlB71qEx1zi.jpg" alt="Paper Deal">
+        <div class="deal-title">Paper Waste Sheets</div>
+        <div class="deal-meta">UK · 80MT · Seller: GreenSource Ltd.</div>
+        <div class="deal-desc">Transparent bidding, traceable contracts, fast transaction cycle.</div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer" style="background:#eafbf5; border-top:1px solid #bee7e3; text-align:center; font-size:1.09rem; color:#148c93; padding:28px 0;">
+    &copy; 2025 Waste2Worth - Where Waste Dealing Meets Intelligence.
+  </footer>
+</body>
+</html>

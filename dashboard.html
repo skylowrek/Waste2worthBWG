@@ -5,21 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Waste2Worth - Dashboard</title>
 <style>
-body { background: #f4fafb; font-family: "Segoe UI", Arial, sans-serif; color: #163c47; margin: 0; padding: 0;}
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #163c47;
+    background: url('website_background.png') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #f7faf9;
+    position: relative;
+}
+
+/* Semi-transparent white overlay for readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255,255,255,0.60);  /* 0.60 can be lowered for more image, raised for more white */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Overlay ensures actual content is on top */
+.dashboard-wrapper,
+h1, .subtitle, .stats-row, .panel-group, .charts-row, .footer, table {
+    position: relative;
+    z-index: 1;
+}
+
 .dashboard-wrapper { max-width: 1300px; margin: 0 auto; padding: 32px 20px 64px; }
 h1 { font-size: 2.5rem; color: #21808d; font-weight: 900; text-align: center; margin-bottom: 1.2rem; }
 .subtitle { text-align: center; color: #466973; font-size: 1.18rem; margin-bottom: 2.2rem; }
 .stats-row { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 2.6rem; }
 .stat-panel {
-  flex: 1 1 240px; background: #eafaf2; border-radius: 14px; box-shadow: 0 2px 16px #21808d11; padding: 30px 0;
-  text-align: center; min-width: 225px;
+    flex: 1 1 240px; background: #eafaf2; border-radius: 14px; box-shadow: 0 2px 16px #21808d11; padding: 30px 0;
+    text-align: center; min-width: 225px;
 }
 .stat-panel .stat-value { font-size: 2.5rem; color: #22a35e; font-weight: 800; }
 .stat-panel .stat-title { font-size: 1.08rem; color: #21808d; font-weight: 700; margin-top: 8px;}
 .panel-group { display: flex; flex-wrap: wrap; gap: 30px; }
 .role-panel {
-  flex: 1 1 420px; background: #ffffff; border-radius: 17px;
-  box-shadow: 0 4px 25px rgba(33,128,141,0.13); padding: 38px 32px; min-width: 330px;
+    flex: 1 1 420px; background: #ffffff; border-radius: 17px;
+    box-shadow: 0 4px 25px rgba(33,128,141,0.13); padding: 38px 32px; min-width: 330px;
 }
 .role-panel h2 { color: #21808d; font-size: 1.28rem; font-weight: 800; margin-bottom: 11px;}
 .panel-stats { display: flex; gap: 22px; margin-bottom: 22px; }
@@ -32,8 +63,8 @@ h1 { font-size: 2.5rem; color: #21808d; font-weight: 900; text-align: center; ma
 .activity-feed .entry:last-child { border-bottom: none; }
 .charts-row { display: flex; flex-wrap: wrap; gap: 34px; margin: 36px 0; }
 .chart-panel {
-  background: #ffffff; border-radius: 16px; box-shadow: 0 7px 20px #21808d1a; padding: 30px 28px;
-  flex: 1 1 520px; min-width: 300px;
+    background: #ffffff; border-radius: 16px; box-shadow: 0 7px 20px #21808d1a; padding: 30px 28px;
+    flex: 1 1 520px; min-width: 300px;
 }
 .chart-panel h2 { font-size: 1.13rem; color:#21808d; font-weight: 800; margin-bottom: 14px;}
 table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; background: #fff; border-radius: 14px; box-shadow: 0 7px 20px #21808d15;}
@@ -43,8 +74,8 @@ tr:last-child td { border-bottom: none;}
 tbody tr:hover { background: #f0f6f9; }
 .footer { margin-top: 54px; color: #50666a; font-size: 1rem; text-align: center; }
 @media (max-width: 950px) {
-  .stats-row, .panel-group, .charts-row { flex-direction: column; }
-  .role-panel, .stat-panel, .chart-panel { min-width: 180px; }
+    .stats-row, .panel-group, .charts-row { flex-direction: column; }
+    .role-panel, .stat-panel, .chart-panel { min-width: 180px; }
 }
 </style>
 </head>
